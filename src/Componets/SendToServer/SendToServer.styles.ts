@@ -13,5 +13,8 @@ export const useStyles = makeStyles({
     slider: {
         width: "50%",
     },
-
+    firstDiv: {
+        width: "25%",
+        height: "25%",
+    },
 })
