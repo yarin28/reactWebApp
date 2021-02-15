@@ -1,116 +1,209 @@
-
-import React, { ComponentType, useCallback, useState } from "react"
-// import { useForm } from "react-hook-form/dist/useForm";
-import { useStyles } from "./SendToServer.styles"
-import { useForm, FormProvider } from "react-hook-form";
-import ErrorMessage from "./ErrorMessages";
-import { Button, IconButton, Slider, Typography } from "@material-ui/core";
-import SendIcon from '@material-ui/icons/Send';
-import FormInput from "../../controls/input";
-const SendToServer: ComponentType = () => {
-    const methods = useForm();
-    const {
-        register,
-        handleSubmit,
-        errors,
-        setError,
-        // clearError,
-        formState: { isSubmitting }
-    } = methods;
-    const onSubmit = (data: any) => {
-        alert(JSON.stringify(data));
-    };
-    const classes = useStyles();
+import React, { ComponentType } from 'react';
+import ReactDOM from 'react-dom';
+import { Form, Field } from 'react-final-form';
+import { TextField, Checkbox, Radio, Select } from 'final-form-material-ui';
+import {
+    Typography,
+    Paper,
+    Link,
+    Grid,
+    Button,
+    CssBaseline,
+    RadioGroup,
+    FormLabel,
+    MenuItem,
+    FormGroup,
+    FormControl,
+    FormControlLabel,
+} from '@material-ui/core';
+// Picker
+const onSubmit = async (values: any) => {
     const sleep = (ms: number) => new Promise(resolve => setTimeout(resolve, ms));
-    const [values, setValues] = useState({ username: '', age: null });
-    const [sliderval, setsliderval] = React.useState<number | string | Array<number | string>>(30);
+    await sleep(300);
+    window.alert(JSON.stringify(values));
+};
+interface FormItems { slider: number }
+const validate = (values: Partial<FormItems>) => {
+    const errors: Partial<FormItems> = {};
 
-    const handleslidervalChange = (event: any, newValue: number | number[]) => {
-        console.log("inside handleslidervalChange ");
-        setsliderval(newValue);
-    };
-    const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-        console.log("inside handleInputChange ");
-        setsliderval(event.target.value === '' ? '' : Number(event.target.value));
-    };
-
-    const handleBlur = () => {
-        if (sliderval < 0) {
-            setsliderval(0);
-        } else if (sliderval > 100) {
-            setsliderval(100);
-        }
-    };
-    const myChangeHandler = (event: { target: { name: any; value: any; }; }) => {
-        const nam = event.target.name;
-        const val = event.target.value;
-        // setValues({ [nam]: val });
-    }
-
-    const SubmitHandler = (event: { preventDefault: () => void; }) => {
-        event.preventDefault();
-        alert("You are submitting " + values.username);
-    }
+    // if (!values.firstName) {
+    //     errors.firstName = 'Required';
+    // }
+    // if (!values.lastName) {
+    //     errors.lastName = 'Required';
+    // }
+    // if (!values.email) {
+    //     errors.email = 'Required';
+    // }
+    return errors;
+};
+const SendToServer: ComponentType = () => {
     return (
-        <>
+        <Form
+            onSubmit={onSubmit}
+            initialValues={{ employed: true, stooge: 'larry' }}
+            validate={validate}
+            render={({ handleSubmit }) => (
 
-
-            <Button
-                variant="contained"
-                color="primary"
-                onClick={handleSubmit(onSubmit)}>
-                SUBMIT
-            </Button>
-
-            <FormProvider {...methods}>
-
-                <form id="sendData" onSubmit={handleSubmit(onSubmit)}>
-                    <h1>Hello {values.username}</h1>
-                    <p>Enter your name:</p>
-                    <input name="temp"
-                        type='text'
-                        ref={register({ required: true })}
-                        onChange={myChangeHandler}
-                    />
-                    <ErrorMessage error={errors.firstName} />
-                    <Typography id="input-sliderval" gutterBottom>
-                        set level
-                </Typography>
-                    <Slider
-                        value={typeof sliderval === 'number' ? sliderval : 0}
-                        onChange={handleslidervalChange}
-                        aria-labelledby="input-sliderval"
-                        className={classes.slider}
-                    />
-                    <FormInput
-                        type='number'
-                        name="sliderNum"
-                        lablel="sliderNum"
-                        ref={register({ required: true })}
-                        className={classes.input}
-                        value={sliderval}
-                        margin="dense"
-                        onChange={handleInputChange}
-                        onBlur={handleBlur}
-                        inputProps={{
-                            step: 1,
-                            min: 0,
-                            max: 100,
-                            type: 'number',
-                            'aria-labelledby': 'input-sliderval',
-                        }}
-                    />
-                    <IconButton type='submit' color="primary">
-                        {/* ref={register({ required: true })}> */}
-                        <SendIcon />
-                    </IconButton>
-                    <FormInput name="name" label="Name" />
+                <form onSubmit={handleSubmit} noValidate>
+                    <Paper style={{ padding: 16 }}>
+                        <Grid container alignItems="flex-start" spacing={2}>
+                            <Grid item xs={6}>
+                                <Field
+                                    fullWidth
+                                    required
+                                    name="firstName"
+                                    component={TextField}
+                                    type="text"
+                                    label="First Name"
+                                />
+                            </Grid>
+                            <Grid item xs={6}>
+                                <Field
+                                    fullWidth
+                                    required
+                                    name="lastName"
+                                    component={TextField}
+                                    type="text"
+                                    label="Last Name"
+                                />
+                            </Grid>
+                            <Grid item xs={12}>
+                                <Field
+                                    name="email"
+                                    fullWidth
+                                    required
+                                    component={TextField}
+                                    type="email"
+                                    label="Email"
+                                />
+                            </Grid>
+                            <Grid item xs={12}>
+                                <FormControlLabel
+                                    label="Employed"
+                                    control={
+                                        <Field
+                                            name="employed"
+                                            component={Checkbox}
+                                            type="checkbox"
+                                        />
+                                    }
+                                />
+                            </Grid>
+                            <Grid item>
+                                <FormControl component="fieldset">
+                                    <FormLabel component="legend">Best Stooge</FormLabel>
+                                    <RadioGroup row>
+                                        <FormControlLabel
+                                            label="Larry"
+                                            control={
+                                                <Field
+                                                    name="stooge"
+                                                    component={Radio}
+                                                    type="radio"
+                                                    value="larry"
+                                                />
+                                            }
+                                        />
+                                        <FormControlLabel
+                                            label="Moe"
+                                            control={
+                                                <Field
+                                                    name="stooge"
+                                                    component={Radio}
+                                                    type="radio"
+                                                    value="moe"
+                                                />
+                                            }
+                                        />
+                                        <FormControlLabel
+                                            label="Curly"
+                                            control={
+                                                <Field
+                                                    name="stooge"
+                                                    component={Radio}
+                                                    type="radio"
+                                                    value="curly"
+                                                />
+                                            }
+                                        />
+                                    </RadioGroup>
+                                </FormControl>
+                            </Grid>
+                            <Grid item>
+                                <FormControl component="fieldset">
+                                    <FormLabel component="legend">Sauces</FormLabel>
+                                    <FormGroup row>
+                                        <FormControlLabel
+                                            label="Ketchup"
+                                            control={
+                                                <Field
+                                                    name="sauces"
+                                                    component={Checkbox}
+                                                    type="checkbox"
+                                                    value="ketchup"
+                                                />
+                                            }
+                                        />
+                                        <FormControlLabel
+                                            label="Mustard"
+                                            control={
+                                                <Field
+                                                    name="sauces"
+                                                    component={Checkbox}
+                                                    type="checkbox"
+                                                    value="mustard"
+                                                />
+                                            }
+                                        />
+                                        <FormControlLabel
+                                            label="Salsa"
+                                            control={
+                                                <Field
+                                                    name="sauces"
+                                                    component={Checkbox}
+                                                    type="checkbox"
+                                                    value="salsa"
+                                                />
+                                            }
+                                        />
+                                        <FormControlLabel
+                                            label="Guacamole 🥑"
+                                            control={
+                                                <Field
+                                                    name="sauces"
+                                                    component={Checkbox}
+                                                    type="checkbox"
+                                                    value="guacamole"
+                                                />
+                                            }
+                                        />
+                                    </FormGroup>
+                                </FormControl>
+                            </Grid>
+                            <Grid item xs={12}>
+                                <Field
+                                    fullWidth
+                                    name="notes"
+                                    component={TextField}
+                                    multiline
+                                    label="Notes"
+                                />
+                            </Grid>
+                            <Grid item style={{ marginTop: 16 }}>
+                                <Button
+                                    variant="contained"
+                                    color="primary"
+                                    type="submit"
+                                >
+                                    Submit
+                  </Button>
+                            </Grid>
+                        </Grid>
+                    </Paper>
                 </form>
-            </FormProvider>
-
-        </>
-
+            )}
+        />
     );
 }
-
 export default SendToServer;
