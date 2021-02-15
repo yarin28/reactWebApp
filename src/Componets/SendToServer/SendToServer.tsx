@@ -1,21 +1,13 @@
 import React, { ComponentType } from 'react';
 import ReactDOM from 'react-dom';
 import { Form, Field } from 'react-final-form';
-import { TextField, Checkbox, Radio, Select } from 'final-form-material-ui';
 import {
-    Typography,
     Paper,
-    Link,
+    Slider,
+    Input,
     Grid,
-    Button,
-    CssBaseline,
-    RadioGroup,
-    FormLabel,
-    MenuItem,
-    FormGroup,
-    FormControl,
-    FormControlLabel,
 } from '@material-ui/core';
+import { useStyles } from './SendToServer.styles';
 // Picker
 const onSubmit = async (values: any) => {
     const sleep = (ms: number) => new Promise(resolve => setTimeout(resolve, ms));
@@ -37,7 +29,25 @@ const validate = (values: Partial<FormItems>) => {
     // }
     return errors;
 };
+
 const SendToServer: ComponentType = () => {
+    const classes = useStyles();
+    const [value, setValue] = React.useState<number | string | Array<number | string>>(30);
+    const handleSliderChange = (event: any, newValue: number | number[]) => {
+        setValue(newValue);
+    };
+
+    const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+        setValue(event.target.value === '' ? '' : Number(event.target.value));
+    };
+
+    const handleBlur = () => {
+        if (value < 0) {
+            setValue(0);
+        } else if (value > 100) {
+            setValue(100);
+        }
+    };
     return (
         <Form
             onSubmit={onSubmit}
@@ -47,157 +57,29 @@ const SendToServer: ComponentType = () => {
 
                 <form onSubmit={handleSubmit} noValidate>
                     <Paper style={{ padding: 16 }}>
-                        <Grid container alignItems="flex-start" spacing={2}>
-                            <Grid item xs={6}>
-                                <Field
-                                    fullWidth
-                                    required
-                                    name="firstName"
-                                    component={TextField}
-                                    type="text"
-                                    label="First Name"
-                                />
-                            </Grid>
-                            <Grid item xs={6}>
-                                <Field
-                                    fullWidth
-                                    required
-                                    name="lastName"
-                                    component={TextField}
-                                    type="text"
-                                    label="Last Name"
-                                />
-                            </Grid>
-                            <Grid item xs={12}>
-                                <Field
-                                    name="email"
-                                    fullWidth
-                                    required
-                                    component={TextField}
-                                    type="email"
-                                    label="Email"
-                                />
-                            </Grid>
-                            <Grid item xs={12}>
-                                <FormControlLabel
-                                    label="Employed"
-                                    control={
-                                        <Field
-                                            name="employed"
-                                            component={Checkbox}
-                                            type="checkbox"
-                                        />
-                                    }
+                        <Grid container spacing={2} alignItems="center">
+                            <Grid item xs>
+                                <Slider
+                                    value={typeof value === 'number' ? value : 0}
+                                    onChange={handleSliderChange}
+                                    aria-labelledby="input-slider"
                                 />
                             </Grid>
                             <Grid item>
-                                <FormControl component="fieldset">
-                                    <FormLabel component="legend">Best Stooge</FormLabel>
-                                    <RadioGroup row>
-                                        <FormControlLabel
-                                            label="Larry"
-                                            control={
-                                                <Field
-                                                    name="stooge"
-                                                    component={Radio}
-                                                    type="radio"
-                                                    value="larry"
-                                                />
-                                            }
-                                        />
-                                        <FormControlLabel
-                                            label="Moe"
-                                            control={
-                                                <Field
-                                                    name="stooge"
-                                                    component={Radio}
-                                                    type="radio"
-                                                    value="moe"
-                                                />
-                                            }
-                                        />
-                                        <FormControlLabel
-                                            label="Curly"
-                                            control={
-                                                <Field
-                                                    name="stooge"
-                                                    component={Radio}
-                                                    type="radio"
-                                                    value="curly"
-                                                />
-                                            }
-                                        />
-                                    </RadioGroup>
-                                </FormControl>
-                            </Grid>
-                            <Grid item>
-                                <FormControl component="fieldset">
-                                    <FormLabel component="legend">Sauces</FormLabel>
-                                    <FormGroup row>
-                                        <FormControlLabel
-                                            label="Ketchup"
-                                            control={
-                                                <Field
-                                                    name="sauces"
-                                                    component={Checkbox}
-                                                    type="checkbox"
-                                                    value="ketchup"
-                                                />
-                                            }
-                                        />
-                                        <FormControlLabel
-                                            label="Mustard"
-                                            control={
-                                                <Field
-                                                    name="sauces"
-                                                    component={Checkbox}
-                                                    type="checkbox"
-                                                    value="mustard"
-                                                />
-                                            }
-                                        />
-                                        <FormControlLabel
-                                            label="Salsa"
-                                            control={
-                                                <Field
-                                                    name="sauces"
-                                                    component={Checkbox}
-                                                    type="checkbox"
-                                                    value="salsa"
-                                                />
-                                            }
-                                        />
-                                        <FormControlLabel
-                                            label="Guacamole 🥑"
-                                            control={
-                                                <Field
-                                                    name="sauces"
-                                                    component={Checkbox}
-                                                    type="checkbox"
-                                                    value="guacamole"
-                                                />
-                                            }
-                                        />
-                                    </FormGroup>
-                                </FormControl>
-                            </Grid>
-                            <Grid item xs={12}>
-                                <Field
-                                    fullWidth
-                                    name="notes"
-                                    component={TextField}
-                                    multiline
-                                    label="Notes"
+                                <Input
+                                    className={classes.input}
+                                    value={value}
+                                    margin="dense"
+                                    onChange={handleInputChange}
+                                    onBlur={handleBlur}
+                                    inputProps={{
+                                        step: 10,
+                                        min: 0,
+                                        max: 100,
+                                        type: 'number',
+                                        'aria-labelledby': 'input-slider',
+                                    }}
                                 />
-                            </Grid>
-                            <Grid item style={{ marginTop: 16 }}>
-                                <Button
-                                    variant="contained"
-                                    color="primary"
-                                    type="submit"
-                                >
-                                    Submit
-                  </Button>
                             </Grid>
                         </Grid>
                     </Paper>
