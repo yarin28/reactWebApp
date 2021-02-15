@@ -14,7 +14,7 @@ export const useStyles = makeStyles({
         width: "50%",
     },
     firstDiv: {
-        width: "25%",
-        height: "25%",
+        width: "50%",
+        height: "50%",
     },
 })
