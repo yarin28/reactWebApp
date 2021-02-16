@@ -46,8 +46,15 @@ const SendToServer: ComponentType<SendToServerProps> = (props) => {
             client.current.send(JSON.stringify(values));
             console.log("there was a send to the server ");
         }
-        window.alert(JSON.stringify(values));
+        // window.alert(JSON.stringify(values));
     };
+    useEffect(() => {
+        if (client.current)
+            client.current.onmessage = (message: any) => {
+                const obj = JSON.parse(message.data);
+                console.log(obj);
+            };
+    }, []);
     const handleSliderChange = (event: any, newValue: number | number[]) => {
         setValue(newValue);
     };
