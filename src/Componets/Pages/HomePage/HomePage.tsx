@@ -1,6 +1,6 @@
 import React, { ComponentType, useCallback, useState } from "react"
 import { useStyles } from "./HomePage.styles"
-import { Link, RouteComponentProps, withRouter } from "react-router-dom";
+import { withRouter } from "react-router-dom";
 import SendToServer from "../../SendToServer";
 
 const HomePage: ComponentType = (props: any) => {
