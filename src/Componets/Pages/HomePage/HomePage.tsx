@@ -1,16 +1,6 @@
 import React, { ComponentType, useCallback, useState } from "react"
-import { Button, GridList, GridListTile } from "@material-ui/core"
 import { useStyles } from "./HomePage.styles"
-import Counter from "./Componets/Counter"
-import { makeStyles } from '@material-ui/core/styles';
-import BottomNavigation from '@material-ui/core/BottomNavigation';
-import BottomNavigationAction from '@material-ui/core/BottomNavigationAction';
-import FolderIcon from '@material-ui/icons/Folder';
-import RestoreIcon from '@material-ui/icons/Restore';
-import FavoriteIcon from '@material-ui/icons/Favorite';
-import LocationOnIcon from '@material-ui/icons/LocationOn';
 import { Link, RouteComponentProps, withRouter } from "react-router-dom";
-import { History, LocationState } from "history";
 import SendToServer from "../../SendToServer";
 
 const HomePage: ComponentType = (props: any) => {
@@ -36,7 +26,7 @@ const HomePage: ComponentType = (props: any) => {
 
     return (
         <div>
-            <SendToServer name="water level" />
+            <SendToServer name="water level" link="setWaterLevel" />
             <h1>welcam to the dashboard</h1>
             <h2>the status is great!</h2>
             <div style={{ height: 100000 }}></div>
