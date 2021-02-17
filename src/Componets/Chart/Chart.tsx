@@ -1,7 +1,7 @@
 
 import React, { ComponentType, useEffect, useMemo, useRef, useState } from "react"
 import { Scatter } from "react-chartjs-2"
-import { Button, colors } from "@material-ui/core";
+import { Button } from "@material-ui/core";
 import { w3cwebsocket as WebSocket } from 'websocket'
 const delay = (ms: number) => new Promise(res => setTimeout(res, ms));
 const Chart: ComponentType = () => {
@@ -61,7 +61,6 @@ const Chart: ComponentType = () => {
             {
                 label: 'good boy',
                 data: xyCords,
-                // backgroundColor:,
                 borderColor: 'white',
                 borderWidth: 2,
                 pointBackgroundColor: (context: any) => { return chooseColorSign(context) },
