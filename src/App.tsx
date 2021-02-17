@@ -31,7 +31,7 @@ const App: ComponentType = () => {
             <Dashboard />
           </Route>
           <Route path="/chart" exact>
-            <Chart />
+            <Chart name="water graph" link="waterGraph" />
           </Route>
         </Switch>
       </Router>
