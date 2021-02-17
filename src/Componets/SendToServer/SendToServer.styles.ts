@@ -17,4 +17,11 @@ export const useStyles = makeStyles({
         width: "50%",
         height: "50%",
     },
+    sentButton: {
+        color: "green"
+    },
+    errorButton: {
+        color: "red"
+    },
+    null: {},
 })
