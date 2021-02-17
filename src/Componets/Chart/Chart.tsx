@@ -4,7 +4,8 @@ import { Scatter } from "react-chartjs-2"
 import { Button } from "@material-ui/core";
 import { w3cwebsocket as WebSocket } from 'websocket'
 const delay = (ms: number) => new Promise(res => setTimeout(res, ms));
-const Chart: ComponentType = () => {
+interface ChartProps { name: string; link: string }
+const Chart: ComponentType<ChartProps> = (props) => {
 
     const [xyCords, xyCordSet] = useState([{
         x: -10,
@@ -19,14 +20,15 @@ const Chart: ComponentType = () => {
 
     const client = useRef<null | WebSocket>(null);
     useEffect(() => {
-        client.current = new WebSocket("ws://localhost:8090/ws");
+        client.current = new WebSocket("ws://192.168.1.13:8090/" + props.link);
+        // will have to be an prop
     }, []);
     useEffect(() => {
         if (client.current)
             client.current.onmessage = (message: any) => {
                 const obj = JSON.parse(message.data);
                 console.log(obj);
-                xyCordSet([...xyCords, { x: obj[1].x, y: obj[1].y }]);
+                xyCordSet([...xyCords, { x: obj.x, y: obj.y }]);
             };
     }, [xyCords]);
     /**

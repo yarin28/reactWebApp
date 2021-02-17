@@ -50,17 +50,7 @@ const NavBar: ComponentType = () => {
                         <MenuIcon />
                     </IconButton>
                     <Typography variant="h3" noWrap>
-                        <Switch>
-                            <Route path="/" exact>
-                                Chicken Coop - Home Page
-                        </Route>
-                            <Route path="/dash" exact>
-                                Chicken Coop - Dashborad
-                            </Route>
-                            <Route path="/chart" exact>
-                                Chicken Coop - Chart
-                                </Route>
-                        </Switch>
+                        Chicken Coop - {history.location.pathname}
                     </Typography>
                 </Toolbar>
             </AppBar>
