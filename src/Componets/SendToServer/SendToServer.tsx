@@ -68,7 +68,7 @@ const SendToServer: ComponentType<SendToServerProps> = (props) => {
                     setButtonColor(1);
                 //i should put an arlart insted
             };
-    }, [buttonColor]);
+    }, []);
     const handleSliderChange = (event: any, newValue: number | number[]) => {
         setValue(newValue);
     };
