@@ -26,9 +26,10 @@ const Chart: ComponentType<ChartProps> = (props) => {
     useEffect(() => {
         if (client.current)
             client.current.onmessage = (message: any) => {
-                const obj = JSON.parse(message.data);
+                const dataArray = JSON.parse(message.data);
+                for (let obj of dataArray) {
                 console.log(obj);
-                xyCordSet([...xyCords, { x: obj.x, y: obj.y }]);
+                xyCordSet([...xyCords, { x: obj.x, y: obj.y }]);}
             };
     }, [xyCords]);
     /**
