@@ -11,6 +11,7 @@ import TimelineIcon from '@material-ui/icons/Timeline';
 import HomeSharpIcon from '@material-ui/icons/HomeSharp';
 import DashboardSharpIcon from '@material-ui/icons/DashboardSharp';
 import InfoSharpIcon from '@material-ui/icons/InfoSharp';
+import Brightness7Icon from '@material-ui/icons/Brightness7';
 import { Route, useHistory, Switch } from "react-router-dom";
 import LiveTvSharpIcon from '@material-ui/icons/LiveTvSharp';
 import LocalDrinkIcon from '@material-ui/icons/LocalDrink';
@@ -67,31 +68,37 @@ const NavBar: ComponentType = () => {
                 </div>
                 <Divider />
                 <List>
+                    <ListItem button onClick={() => history.push("/brightness")}>
+                        <ListItemIcon  >
+                            <Brightness7Icon color="secondary"></Brightness7Icon>
+                        </ListItemIcon>
+                        <ListItemText primaryTypographyProps={{ color: "secondary" }} primary="Brightness" />
+                    </ListItem>
                     <ListItem button onClick={() => history.push("/chart")}>
                         <ListItemIcon  >
                             <MailIcon color="secondary"></MailIcon>
                         </ListItemIcon>
                         <ListItemText primaryTypographyProps={{ color: "secondary" }} primary="info" />
                     </ListItem>
-                    <ListItem button onClick={() => history.push("/chart")}>
+                    <ListItem button onClick={() => history.push("/humidity")}>
                         <ListItemIcon >
                             <TimelineIcon color="secondary" ></TimelineIcon>
                         </ListItemIcon>
-                        <ListItemText color="secondary" primaryTypographyProps={{ color: "secondary" }} primary="charts" />
+                        <ListItemText color="secondary" primaryTypographyProps={{ color: "secondary" }} primary="humidity" />
                     </ListItem>
-                    <ListItem button onClick={() => history.push("/chart")}>
+                    <ListItem button onClick={() => history.push("/humidity")}>
                         <ListItemIcon >
                             <HomeSharpIcon color="secondary"></HomeSharpIcon>
                         </ListItemIcon>
                         <ListItemText primaryTypographyProps={{ color: "secondary" }} primary="home status" />
                     </ListItem>
-                    <ListItem button onClick={() => history.push("/chart")}>
+                    <ListItem button onClick={() => history.push("/dashboard")}>
                         <ListItemIcon >
                             <DashboardSharpIcon color="secondary"></DashboardSharpIcon>
                         </ListItemIcon>
                         <ListItemText primaryTypographyProps={{ color: "secondary" }} primary="dashBoard" />
                     </ListItem>
-                    <ListItem button onClick={() => history.push("/chart")}>
+                    <ListItem button onClick={() => history.push("/dashboard")}>
                         <ListItemIcon >
                             <InfoSharpIcon color="secondary"></InfoSharpIcon>
                         </ListItemIcon>
@@ -110,6 +117,12 @@ const NavBar: ComponentType = () => {
                             <LiveTvSharpIcon color="secondary"></LiveTvSharpIcon>
                         </ListItemIcon>
                         <ListItemText primaryTypographyProps={{ color: "secondary" }} primary="livestream" />
+                    </ListItem>
+                    <ListItem button onClick={() => history.push("/temperature")}>
+                        <ListItemIcon >
+                            <LocalDrinkIcon color="secondary"></LocalDrinkIcon>
+                        </ListItemIcon>
+                        <ListItemText primaryTypographyProps={{ color: "secondary" }} primary="Water" />
                     </ListItem>
                     <ListItem button onClick={() => history.push("/chart")}>
                         <ListItemIcon >
