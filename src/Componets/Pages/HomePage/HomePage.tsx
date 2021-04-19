@@ -26,7 +26,7 @@ const HomePage: ComponentType = (props: any) => {
 
     return (
         <div>
-            <SendToServer name="water level" link="setWaterLevel" />
+            {/* <SendToServer name="water level" link="setWaterLevel" /> */}
             <h1>welcam to the dashboard</h1>
             <h2>the status is great!</h2>
             <div style={{ height: 100000 }}></div>
