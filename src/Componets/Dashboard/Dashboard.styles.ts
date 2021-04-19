@@ -5,8 +5,10 @@ export const useStyles = makeStyles({
     container: {
         display: "flex",
         flexWrap: "wrap",
+        flexDirection:"column",
+        flexGrow: 4,
         // backgroundColor: "DodgerBlue",
-        justifyContent: "space-evenly",
+        justifyContent: "center",
     },
     button1: {
         backgroundColor: "green",
@@ -15,5 +17,9 @@ export const useStyles = makeStyles({
     button2: {
         backgroundColor: "red",
         flexGrow: 2,
-    }
+    },
+   largeIcon: {
+    width: 60,
+    height: 60,
+  },
 })
