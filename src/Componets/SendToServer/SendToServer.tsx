@@ -27,7 +27,7 @@ const validate = (values: Partial<FormItems>) => {
     // }
     return errors;
 };
-interface SendToServerProps { name: string; link: string }
+interface SendToServerProps { name: string; link: string; query: string;cords:any;setCords:any }
 const SendToServer: ComponentType<SendToServerProps> = (props) => {
     enum Colors {
         defult = 0,
@@ -37,38 +37,28 @@ const SendToServer: ComponentType<SendToServerProps> = (props) => {
     const classes = useStyles();
     const [value, setValue] = React.useState<number | string | Array<number | string>>(30);
     const [buttonColor, setButtonColor] = useState(0)
-    const client = useRef<null | WebSocket>(null);
-    useEffect(() => {
-        client.current = new WebSocket("ws://localhost:8090/" + props.link);
-        console.log(client);
-        //TODO must change it to be a prop the the compuniont will get!!
-    }, []);
 
     const onSubmit = async (values: any) => {
-        const sleep = (ms: number) => new Promise(resolve => setTimeout(resolve, ms));
-        await sleep(300);
-        // console.log(values);
-        if (client.current) {
-            try {
-                client.current.send(JSON.stringify(values));
+        try {
+            console.log(values);
+            const response = await fetch("http://192.168.1.15:8090/" + props.link + props.query + value);
+            const data = await response.json();
+            const realy_json = JSON.parse(data)
+            console.log(data);
+            console.log(Date.parse(realy_json[0].x));
+            for (let cord of realy_json) {
+                addXY({ x: Date.parse(cord.x), y: cord.y });
             }
-            catch (Error) {
-                setButtonColor(2)
-            }
-            console.log("there was a send to the server ");
+            setButtonColor(Colors.green)
         }
-        // window.alert(JSON.stringify(values));
+        catch (Error) {
+            setButtonColor(Colors.red)
+        }
+        console.log("there was a send to the server ");
+    }
+    const addXY = async (xy: { x: number; y: number; }) => {
+        props.setCords((oldArray:any)=> [...oldArray, xy]);
     };
-    useEffect(() => {
-        if (client.current)
-            client.current.onmessage = (message: any) => {
-                let obj = JSON.parse(message.data);
-                console.log(obj);
-                if (obj === 200)
-                    setButtonColor(1);
-                //i should put an arlart insted
-            };
-    }, []);
     const handleSliderChange = (event: any, newValue: number | number[]) => {
         setValue(newValue);
     };
