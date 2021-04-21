@@ -4,6 +4,7 @@ import LocalDrinkIcon from '@material-ui/icons/LocalDrink';
 import { Grid, IconButton, Input, Paper, Slider, Typography } from "@material-ui/core";
 import { useStyles } from './SetInterval.styles'
 import { Form } from "react-final-form";
+import StatusInfo from "../../StatusInfo";
 
 const delay = (ms: number) => new Promise(res => setTimeout(res, ms));
 interface SetIntervalProps { place :string; ip:string;name: string; query: string; }
@@ -14,7 +15,7 @@ const SetInterval: ComponentType<SetIntervalProps> = (props) => {
         red,
     }
     const [value, setValue] = React.useState<number | string | Array<number | string>>(30);
-    const [description, setDescription] = useState("open or close the door");
+    const [description, setDescription] = useState("");
     const [buttonColor, setButtonColor] = useState(0)
     const classes = useStyles();
     const onSubmit = async(values:any)=>
@@ -24,7 +25,7 @@ const SetInterval: ComponentType<SetIntervalProps> = (props) => {
                 method: 'POST',
             });
      const data = await response.json();
-            const realy_json = JSON.parse(data);
+            // const realy_json = JSON.parse(data);
             console.log(data);
             setDescription("sent " + value + " to the garden");
         }
@@ -98,6 +99,7 @@ const SetInterval: ComponentType<SetIntervalProps> = (props) => {
                                 {/* <IconButton onClick={(event) => console.log(event)} type='submit' color="primary"> */}
                                 send
                         </IconButton>
+                        <Typography>{description}</Typography>
                         </Paper>
                     </form>
                 )}
