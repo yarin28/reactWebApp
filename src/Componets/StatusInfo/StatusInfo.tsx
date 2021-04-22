@@ -30,6 +30,7 @@ const StatusInfo: ComponentType<StatusInfoProps> = (props) => {
   }
   useEffect(() => {
     try {
+      console.log(props.ip + props.whereToRegister + "/register");
       client.current = new WebSocket(props.ip + props.whereToRegister + "/register");
     }
     catch (e) {
