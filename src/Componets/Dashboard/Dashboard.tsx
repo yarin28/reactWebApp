@@ -8,11 +8,14 @@ import FormatColorResetIcon from '@material-ui/icons/FormatColorReset';
 import LocalDrinkIcon from '@material-ui/icons/LocalDrink';
 import WhatshotIcon from '@material-ui/icons/Whatshot';
 import AcUnitIcon from '@material-ui/icons/AcUnit';
+import LockIcon from '@material-ui/icons/Lock';
+import LockOpenIcon from '@material-ui/icons/LockOpen';
 import Door from '../Door'
 const Dashboard: ComponentType = () => {
     const classes = useStyles()
     const Buttons = [];
     const isNight = (n: number | Float32Array) => { return n > 50 };
+    const isClosed = (n: number | Float32Array) => { return n == 0 };
     const isHumidityHealthy = (n: number | Float32Array) => { return (n > 10 && n < 80) };
     const isTemperature = (n: number | Float32Array) => { return (n > 10 && n < 30) };
     for (let i = 0; i < 20; i++) {
@@ -30,17 +33,16 @@ const Dashboard: ComponentType = () => {
                 GoodMaterialUiIcon={SettingsBrightnessIcon}
                 BadMaterialUiIcon={NightsStayIcon}
                 description="this is the level of brightness" />
-                <Door 
-                ip="192.168.1.15:8090"
-                place="door"
-                query="?set="
-                whereToRegister="temperature"
-                GoodMaterialUiIcon={FormatColorResetIcon}
-                BadMaterialUiIcon={LocalDrinkIcon}
-                />            
-                
-                
-                <StatusInfo
+
+            <StatusInfo
+                isGoodCallback={isClosed}
+                ip="ws://192.168.1.15:8090/"
+                whereToRegister="door"
+                BadMaterialUiIcon={LockOpenIcon}
+                GoodMaterialUiIcon={LockIcon}
+                description="door status" />
+
+            <StatusInfo
 
                 isGoodCallback={isTemperature}
                 ip="ws://192.168.1.15:8090/"

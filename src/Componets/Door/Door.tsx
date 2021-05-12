@@ -29,7 +29,7 @@ const Door: ComponentType<DoorProps> = (props) => {
                 method: 'POST',
             });
             const data = await response.json();
-            const realy_json = JSON.parse(data);
+            // const realy_json = JSON.parse(data);
             console.log(data);
             setDescription("sent " + boolToTxt + " to the garden");
         }
