@@ -23,7 +23,8 @@ const DoorPage: ComponentType = (props) => {
                 // ip="192.168.1.15:8090"
                 place="door"
                 query="?set="
-                whereToRegister="temperature"
+                whereToRegister="temperature" 
+                // the temperture is very wird
                 GoodMaterialUiIcon={FormatColorResetIcon}
                 BadMaterialUiIcon={LocalDrinkIcon}
                 />            
