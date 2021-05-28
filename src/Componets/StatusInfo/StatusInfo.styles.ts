@@ -19,6 +19,9 @@ export const useStyles = makeStyles((theme: Theme) =>
     color:"red",
     fontSize: "100%",
     },
+    insidePaper:{
+      padding: theme.spacing(1),
+    },
     green:{
     color:"green",
     fontSize: "100%",

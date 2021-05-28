@@ -1,4 +1,4 @@
-import React, { ComponentType } from 'react';
+import React, { ComponentType, useState } from 'react';
 import {
   BrowserRouter as Router,
   Switch,
@@ -17,17 +17,24 @@ import { theme } from "./theme"
 import Brighness from './Componets/Pages/Brightness'
 import Humidity from './Componets/Pages/Humidity'
 import Temperture from './Componets/Pages/Temperature'
+import SignInSide from './Componets/Login'
+import SignUp from './Componets/SignUp'
 import SettingsBrightnessIcon from '@material-ui/icons/SettingsBrightness';
 import Door from './Componets/Door';
 import DoorPage from './Componets/Pages/DoorPage';
 import SetInterval from './Componets/Pages/SetInterval';
+import Motor from "./Componets/Motor"
+import About from "./Componets/About"
+import Pump from "./Componets/Pump"
 
 
 const App: ComponentType = () => {
   const classes = useStyles();
+  const [loged,setLoged] = useState(false);
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline></CssBaseline>
+    {loged ?
       <Router>
         <NavBar />
         <div className={classes.appBarSpacer}></div>
@@ -41,6 +48,15 @@ const App: ComponentType = () => {
           <Route path="/chart" exact>
             {/* <Chart name="brightness" link="brightness" /> */}
           </Route>
+          <Route path="/signUp" exact>
+          <SignUp setLoged={setLoged}></SignUp>
+          </Route>
+          <Route path="/about" exact>
+            <About></About>
+          </Route>
+          <Route path="/pump" exact>
+<Pump name="water"></Pump>
+          </Route>
           <Route path="/humidity" exact>
             <Humidity></Humidity>
           </Route>
@@ -53,6 +69,9 @@ const App: ComponentType = () => {
           <Route path="/dashBoard" exact>
             <Dashboard></Dashboard>
           </Route>
+          <Route path="/motor" exact>
+            <Motor name="door" ></Motor>
+          </Route>
           <Route path="/door" exact>
             <DoorPage></DoorPage>
           </Route>
@@ -60,7 +79,23 @@ const App: ComponentType = () => {
       <SetInterval ip="192.168.1.15:8090" place="/interval/" query="?set=" name="interval"></SetInterval>
           </Route>
         </Switch>
-      </Router>
+      </Router> :
+      
+      <>
+      <Router> 
+        <Switch>
+          <Route path="/signUp" exact>
+          <SignUp setLoged={setLoged} ></SignUp>
+          </Route>
+          <Route path = "/" excat>
+            <SignInSide  setLoged={setLoged}></SignInSide>
+          </Route>
+        </Switch>
+      </Router> 
+
+</>
+      
+      }
     </ThemeProvider>
   );
 }

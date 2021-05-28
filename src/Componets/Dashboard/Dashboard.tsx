@@ -1,5 +1,5 @@
 import React, { ComponentType } from "react"
-import { Button, Typography } from "@material-ui/core"
+import { Button, Grid, Paper, Typography } from "@material-ui/core"
 import { useStyles } from "./Dashboard.styles"
 import StatusInfo from '../StatusInfo'
 import SettingsBrightnessIcon from '@material-ui/icons/SettingsBrightness';
@@ -26,37 +26,60 @@ const Dashboard: ComponentType = () => {
     }
     return (
         <div className={classes.container}>
-            <StatusInfo
-                isGoodCallback={isNight}
-                ip="ws://192.168.1.15:8090/"
-                whereToRegister="brightness"
-                GoodMaterialUiIcon={SettingsBrightnessIcon}
-                BadMaterialUiIcon={NightsStayIcon}
-                description="this is the level of brightness" />
+            <Grid  className={classes.mContainer}>
+                <Grid item >
+                    <StatusInfo
+                        isGoodCallback={isNight}
+                        ip="ws://192.168.1.15:8090/"
+                        whereToRegister="brightness"
+                        GoodMaterialUiIcon={SettingsBrightnessIcon}
+                        BadMaterialUiIcon={NightsStayIcon}
+                        description="this is the level of brightness" />
 
-            <StatusInfo
-                isGoodCallback={isClosed}
-                ip="ws://192.168.1.15:8090/"
-                whereToRegister="door"
-                BadMaterialUiIcon={LockOpenIcon}
-                GoodMaterialUiIcon={LockIcon}
-                description="door status" />
+                </Grid>
+                <Grid item >
+                    <StatusInfo
+                        isGoodCallback={isClosed}
+                        ip="ws://192.168.1.15:8090/"
+                        whereToRegister="door"
+                        BadMaterialUiIcon={LockOpenIcon}
+                        GoodMaterialUiIcon={LockIcon}
+                        description="door status" />
 
-            <StatusInfo
+                </Grid>
+                <Grid item >
+                    <StatusInfo
+                        isGoodCallback={isClosed}
+                        ip="ws://192.168.1.15:8090/"
+                        whereToRegister="water_level"
+                        BadMaterialUiIcon={LockOpenIcon}
+                        GoodMaterialUiIcon={LockIcon}
+                        description="door status" />
 
-                isGoodCallback={isTemperature}
-                ip="ws://192.168.1.15:8090/"
-                whereToRegister="temperature"
-                GoodMaterialUiIcon={FormatColorResetIcon}
-                BadMaterialUiIcon={LocalDrinkIcon}
-                description="this is the temperature in the coop" />
-            <StatusInfo
-                isGoodCallback={isHumidityHealthy}
-                ip="ws://192.168.1.15:8090/"
-                whereToRegister="humidity"
-                GoodMaterialUiIcon={WhatshotIcon}
-                BadMaterialUiIcon={AcUnitIcon}
-                description="this is the humidity in the coop" />
+                </Grid>
+                <Grid item >
+                    <StatusInfo
+
+                        isGoodCallback={isTemperature}
+                        ip="ws://192.168.1.15:8090/"
+                        whereToRegister="temperature"
+                        GoodMaterialUiIcon={FormatColorResetIcon}
+                        BadMaterialUiIcon={LocalDrinkIcon}
+                        description="this is the temperature in the coop" />
+                </Grid>
+                <Grid item >
+                    <StatusInfo
+                        isGoodCallback={isHumidityHealthy}
+                        ip="ws://192.168.1.15:8090/"
+                        whereToRegister="humidity"
+                        GoodMaterialUiIcon={WhatshotIcon}
+                        BadMaterialUiIcon={AcUnitIcon}
+                        description="this is the humidity in the coop" />
+                </Grid>
+            </Grid>
+
+
+
         </div>
     )
 }

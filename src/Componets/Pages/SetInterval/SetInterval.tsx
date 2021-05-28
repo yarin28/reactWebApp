@@ -49,7 +49,7 @@ const SetInterval: ComponentType<SetIntervalProps> = (props) => {
     };
     return (
         <div className={classes.root}>
-            <Typography> set the miliseconds of sampeling אני נדיר </Typography>
+            <Typography> set the miliseconds of sampeling </Typography>
             <Form
                 onSubmit={onSubmit}
                 initialValues={value}

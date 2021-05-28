@@ -6,7 +6,7 @@ const Humidity:ComponentType = ( props:any )=> {
     const [xyCords, xyCordSet] = useState([{}]);
     return (
         <div>
-            <Chart name="humidity" link="humidity" cords={xyCords}
+            <Chart name="humidity"  cords={xyCords} condition={(y:number)=>{return y>80}}
             setCords={xyCordSet}/>
             <SendToServer name="get days" link="humidity" query="/?days="
             cords={xyCords} setCords={xyCordSet}></SendToServer>
