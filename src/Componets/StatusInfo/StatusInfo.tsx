@@ -4,14 +4,17 @@ import { Theme, createStyles, makeStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
 import Typography from '@material-ui/core/Typography';
 import { useStyles } from "./StatusInfo.styles"
+import { Grid } from "@material-ui/core";
+import { Typewriter } from 'react-typewriting-effect'
+
 
 interface StatusInfoProps {
   ip: string;
   whereToRegister: string;
-  BadMaterialUiIcon: any; 
+  BadMaterialUiIcon: any;
   GoodMaterialUiIcon: any;
   description: string;
-   isGoodCallback: (n: number) => boolean;
+  isGoodCallback: (n: number) => boolean;
 };
 const StatusInfo: ComponentType<StatusInfoProps> = (props) => {
   const classes = useStyles();
@@ -54,14 +57,22 @@ const StatusInfo: ComponentType<StatusInfoProps> = (props) => {
   return (
     <div className={classes.root}>
       <Card elevation={3}>
-
-        <Typography  >
-          {props.description}
-        </Typography>
-        <Typography variant="h3" >
-          {chooseIcon()}
-          {value}
-        </Typography>
+        <Grid>
+          <Typography className={classes.insidePaper} variant="h3" >
+            {chooseIcon()}
+          </Typography>
+          <Typography className={classes.insidePaper} variant="h3" >
+            {value}
+          </Typography>
+          <Typography className={classes.insidePaper} variant="h5" >
+            <Typewriter
+              delay={80}
+              string={props.description}
+              stopBlinkinOnComplete
+              onComplete={()=>{}}
+            />
+          </Typography>
+        </Grid>
       </Card>
     </div>
   );

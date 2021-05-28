@@ -17,7 +17,10 @@ import LiveTvSharpIcon from '@material-ui/icons/LiveTvSharp';
 import LocalDrinkIcon from '@material-ui/icons/LocalDrink';
 import Chicken from '../../Chicken.svg'
 import Food from '../../Food.svg'
-
+import Temp from '../../temp.svg'
+import Motor from '../../motor.svg'
+import FlipCameraAndroidIcon from '@material-ui/icons/FlipCameraAndroid';
+import OpacityIcon from '@material-ui/icons/Opacity';
 const NavBar: ComponentType = () => {
     console.log('rendered the NavBar');
     const history = useHistory();
@@ -98,7 +101,7 @@ const NavBar: ComponentType = () => {
                         </ListItemIcon>
                         <ListItemText primaryTypographyProps={{ color: "secondary" }} primary="dashBoard" />
                     </ListItem>
-                    <ListItem button onClick={() => history.push("/dashboard")}>
+                    <ListItem button onClick={() => history.push("/about")}>
                         <ListItemIcon >
                             <InfoSharpIcon color="secondary"></InfoSharpIcon>
                         </ListItemIcon>
@@ -119,10 +122,9 @@ const NavBar: ComponentType = () => {
                         <ListItemText primaryTypographyProps={{ color: "secondary" }} primary="livestream" />
                     </ListItem>
                     <ListItem button onClick={() => history.push("/temperature")}>
-                        <ListItemIcon >
-                            <LocalDrinkIcon color="secondary"></LocalDrinkIcon>
-                        </ListItemIcon>
-                        <ListItemText primaryTypographyProps={{ color: "secondary" }} primary="Water" />
+                        <img src={Temp} className={classes.svg} alt="temperature" />
+                        <ListItemText primaryTypographyProps={{ color: "secondary" }} primary="temperature" />
+                        {/* <ListItemText primaryTypographyProps={{ color: "secondary" }} primary="Water" /> */}
                     </ListItem>
                     <ListItem button onClick={() => history.push("/chart")}>
                         <ListItemIcon >
@@ -130,11 +132,23 @@ const NavBar: ComponentType = () => {
                         </ListItemIcon>
                         <ListItemText primaryTypographyProps={{ color: "secondary" }} primary="Water" />
                     </ListItem>
+                    <ListItem button onClick={() => history.push("/pump")}>
+                        <ListItemIcon >
+                            <OpacityIcon color="secondary"></OpacityIcon>
+                        </ListItemIcon>
+                        <ListItemText primaryTypographyProps={{ color: "secondary" }} primary="Water pump" />
+                    </ListItem>
+                    <ListItem button onClick={() => history.push("/motor")}>
+                        <ListItemIcon >
+                            <FlipCameraAndroidIcon color="secondary" ></FlipCameraAndroidIcon>
+                        </ListItemIcon>
+                        <ListItemText primaryTypographyProps={{ color: "secondary" }} primary="Motor" />
+                    </ListItem>
                 </List>
             </Drawer>
 
         </div >
     );
-};
+}; 
 
 export default NavBar;

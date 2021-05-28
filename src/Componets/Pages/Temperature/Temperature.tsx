@@ -6,7 +6,7 @@ const Temperature:ComponentType = ( props:any )=> {
     const [xyCords, xyCordSet] = useState([{}]);
     return (
         <div>
-            <Chart name="temperature" link="temperature" cords={xyCords}
+            <Chart name="temperature"  cords={xyCords} condition={(y:number)=>{return y>80}}
             setCords={xyCordSet}/>
             <SendToServer name="get days" link="temperature" query="/?days="
             cords={xyCords} setCords={xyCordSet}></SendToServer>

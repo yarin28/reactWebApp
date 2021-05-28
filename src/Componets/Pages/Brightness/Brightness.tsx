@@ -6,7 +6,7 @@ const Brightness:ComponentType = ( props:any )=> {
     const [xyCords, xyCordSet] = useState([{}]);
     return (
         <div>
-            <Chart name="brightness" link="brightness" cords={xyCords}
+            <Chart name="brightness"  cords={xyCords} condition={(y:number)=>{return y>30}}
             setCords={xyCordSet}/>
             <SendToServer name="get days" link="brightness" query="/?days="
             cords={xyCords} setCords={xyCordSet}></SendToServer>
