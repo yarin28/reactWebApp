@@ -18,6 +18,7 @@ const Dashboard: ComponentType = () => {
     const isClosed = (n: number | Float32Array) => { return n == 0 };
     const isHumidityHealthy = (n: number | Float32Array) => { return (n > 10 && n < 80) };
     const isTemperature = (n: number | Float32Array) => { return (n > 10 && n < 30) };
+    const isWater = (n: number | Float32Array) => { return (n>10) };
     for (let i = 0; i < 20; i++) {
         if (i % 2 !== 1)
             Buttons.push(<Button size="small" className={classes.button1} >{i}</Button>)
@@ -30,7 +31,7 @@ const Dashboard: ComponentType = () => {
                 <Grid item >
                     <StatusInfo
                         isGoodCallback={isNight}
-                        ip="ws://192.168.1.15:8090/"
+                        ip={ "ws://"+"10.0.0.12:8090"+"/" }
                         whereToRegister="brightness"
                         GoodMaterialUiIcon={SettingsBrightnessIcon}
                         BadMaterialUiIcon={NightsStayIcon}
@@ -40,7 +41,7 @@ const Dashboard: ComponentType = () => {
                 <Grid item >
                     <StatusInfo
                         isGoodCallback={isClosed}
-                        ip="ws://192.168.1.15:8090/"
+                        ip={ "ws://"+"10.0.0.12:8090"+"/" }
                         whereToRegister="door"
                         BadMaterialUiIcon={LockOpenIcon}
                         GoodMaterialUiIcon={LockIcon}
@@ -49,19 +50,19 @@ const Dashboard: ComponentType = () => {
                 </Grid>
                 <Grid item >
                     <StatusInfo
-                        isGoodCallback={isClosed}
-                        ip="ws://192.168.1.15:8090/"
-                        whereToRegister="water_level"
-                        BadMaterialUiIcon={LockOpenIcon}
-                        GoodMaterialUiIcon={LockIcon}
-                        description="door status" />
+                        isGoodCallback={isWater}
+                        ip={ "ws://"+"10.0.0.12:8090"+"/" }
+                        whereToRegister="pump"
+                        BadMaterialUiIcon={LocalDrinkIcon}
+                        GoodMaterialUiIcon={LocalDrinkIcon}
+                        description="water level inside the drinking container" />
 
                 </Grid>
                 <Grid item >
                     <StatusInfo
 
                         isGoodCallback={isTemperature}
-                        ip="ws://192.168.1.15:8090/"
+                        ip={ "ws://"+"10.0.0.12:8090"+"/" }
                         whereToRegister="temperature"
                         GoodMaterialUiIcon={FormatColorResetIcon}
                         BadMaterialUiIcon={LocalDrinkIcon}
@@ -70,7 +71,7 @@ const Dashboard: ComponentType = () => {
                 <Grid item >
                     <StatusInfo
                         isGoodCallback={isHumidityHealthy}
-                        ip="ws://192.168.1.15:8090/"
+                        ip={ "ws://"+"10.0.0.12:8090"+"/" }
                         whereToRegister="humidity"
                         GoodMaterialUiIcon={WhatshotIcon}
                         BadMaterialUiIcon={AcUnitIcon}

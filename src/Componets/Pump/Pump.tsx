@@ -48,7 +48,7 @@ const Pump: ComponentType<PumpProps> = (props) => {
     const onSubmit = async (values: any) => {
         try {
             console.log(values);
-            const response = await fetch("http://192.168.1.15:8090/pump/?milliseconds=" + value);
+            const response = await fetch("http://10.0.0.12:8090/pump/?milliseconds=" + value);
             const data = await response.json();
             console.log(response);
             if (response.status==406) {
@@ -69,6 +69,7 @@ const Pump: ComponentType<PumpProps> = (props) => {
             setOpenServerError(true);
             }
             setButtonColor(Colors.red)
+            setOpenServerError(true);
         }
     }
     const handleSliderChange = (event: any, newValue: number | number[]) => {

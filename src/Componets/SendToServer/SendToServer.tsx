@@ -45,7 +45,7 @@ const SendToServer: ComponentType<SendToServerProps> = (props) => {
     const onSubmit = async (values: any) => {
         try {
             console.log(values);
-            const response = await fetch("http://192.168.1.15:8090/" + props.link + props.query + value);
+            const response = await fetch("http://10.0.0.12:8090/" + props.link + props.query + value);
             const data = await response.json();
             if (response.status ==406){
                 setOpenError(true);

@@ -70,7 +70,7 @@ const SignUp: ComponentType<SignUpProps> = (props) => {
         setPassword(event.target.value);
     }
     const handleSubmit = async (event: any) => {
-        const url: string = "http://192.168.1.15:8090/login/sign_up/" + "?"
+        const url: string = "http://10.0.0.12:8090/login/sign_up/" + "?"
             + "username=" + username + "&password=" + password;
         const response = await fetch(url, 
         {

@@ -28,7 +28,7 @@ const Chart: ComponentType<ChartProps> = (props) => {
                 label: props.name,
                 // the array of x y coordinates 
                 data: props.cords,
-                borderColor: 'white',
+                borderColor: 'black',
                 borderWidth: 2,
                 pointBackgroundColor: (context: any) => { return chooseColorSign(context) },
                 pointBorderColor: (context: any) => { return chooseColorSign(context) },

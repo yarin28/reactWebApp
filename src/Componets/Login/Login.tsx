@@ -74,7 +74,7 @@ const Login: ComponentType<LoginProps> = (props) => {
   }
   const handleSubmit = async (event: any) => {
     try{
-        const url: string = "http://192.168.1.15:8090/login/login/" + "?"
+        const url: string = "http://10.0.0.12:8090/login/login/" + "?"
       + "username=" + username + "&password=" + password;
     const response = await fetch(url);
     const data = await response.json();

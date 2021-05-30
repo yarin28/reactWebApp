@@ -12,7 +12,7 @@ import Chart from './Componets/Chart';
 import NavBar from './Componets/NavBar'
 import StatusInfo from './Componets/StatusInfo'
 import { useStyles } from './App.styles'
-import { CssBaseline, ThemeProvider } from '@material-ui/core';
+import { CssBaseline, ThemeProvider, Typography } from '@material-ui/core';
 import { theme } from "./theme"
 import Brighness from './Componets/Pages/Brightness'
 import Humidity from './Componets/Pages/Humidity'
@@ -26,11 +26,11 @@ import SetInterval from './Componets/Pages/SetInterval';
 import Motor from "./Componets/Motor"
 import About from "./Componets/About"
 import Pump from "./Componets/Pump"
-
+import VideoStream from "./Componets/VideoStream"
 
 const App: ComponentType = () => {
   const classes = useStyles();
-  const [loged,setLoged] = useState(false);
+  const [loged,setLoged] = useState(true);
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline></CssBaseline>
@@ -41,6 +41,9 @@ const App: ComponentType = () => {
         <Switch>
           <Route path="/" exact>
            <HomePage />
+          </Route>
+          <Route path="/live_stream" exact>
+            <VideoStream wsUrl="ws://10.0.0.13:8000/video_feed" showFrames></VideoStream>
           </Route>
           <Route path="/dash" exact>
             <Dashboard />
@@ -76,7 +79,7 @@ const App: ComponentType = () => {
             <DoorPage></DoorPage>
           </Route>
           <Route path="/interval" exact>
-      <SetInterval ip="192.168.1.15:8090" place="/interval/" query="?set=" name="interval"></SetInterval>
+      <SetInterval ip="10.0.0.12:8090" place="/interval/" query="?set=" name="interval"></SetInterval>
           </Route>
         </Switch>
       </Router> :
@@ -87,7 +90,7 @@ const App: ComponentType = () => {
           <Route path="/signUp" exact>
           <SignUp setLoged={setLoged} ></SignUp>
           </Route>
-          <Route path = "/" excat>
+          <Route path = "/" exact>
             <SignInSide  setLoged={setLoged}></SignInSide>
           </Route>
         </Switch>

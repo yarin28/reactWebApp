@@ -31,7 +31,7 @@ const validate = (values: Partial<FormItems>) => {
 };
 interface MotorProps { name: string }
 const Motor: ComponentType<MotorProps> = (props) => {
-    const sliderLimit = 1000;
+    const sliderLimit = 10000;
     enum Colors {
         defult = 0,
         green,
@@ -48,7 +48,7 @@ const Motor: ComponentType<MotorProps> = (props) => {
     const onSubmit = async (values: any) => {
         try {
             console.log(values);
-            const response = await fetch("http://192.168.1.15:8090/motor/?steps=" + value);
+            const response = await fetch("http://10.0.0.12:8090/motor/?steps=" + value);
             const data = await response.json();
             console.log(response);
             if (response.status==406) {
