@@ -1,13 +1,16 @@
-import React, { ComponentType, useEffect, useMemo, useRef, useState } from "react"
-import FormatColorResetIcon from '@material-ui/icons/FormatColorReset';
-import LocalDrinkIcon from '@material-ui/icons/LocalDrink';
+import React, { ComponentType ,useState}from "react"
 import { Grid, IconButton, Input, Paper, Slider, Typography } from "@material-ui/core";
 import { useStyles } from './SetInterval.styles'
 import { Form } from "react-final-form";
-import StatusInfo from "../../StatusInfo";
 
-const delay = (ms: number) => new Promise(res => setTimeout(res, ms));
 interface SetIntervalProps { place :string; ip:string;name: string; query: string; }
+/**
+ * @brief  sends to the server request to change the interval of the sampling if the sensors.
+ * will change the color of the button according to the status of the request.
+ * 
+ * @param props for the customizing the componetnt to other uses.
+ * @returns 
+ */
 const SetInterval: ComponentType<SetIntervalProps> = (props) => {
     enum Colors {
         defult = 0,
@@ -49,7 +52,7 @@ const SetInterval: ComponentType<SetIntervalProps> = (props) => {
     };
     return (
         <div className={classes.root}>
-            <Typography> set the miliseconds of sampeling </Typography>
+            <Typography> set the milliseconds of sampling the sensors in the coop </Typography>
             <Form
                 onSubmit={onSubmit}
                 initialValues={value}
@@ -88,7 +91,6 @@ const SetInterval: ComponentType<SetIntervalProps> = (props) => {
                                     />
                                 </Grid>
                             </Grid>
-                            {/* <IconButton onClick={() => setButtonColor(!buttonColor)} className={buttonColor ? classes.sentButton : classes.null} type='submit' color="primary"> */}
                             <IconButton
                                 className=
                                 {(buttonColor === Colors.defult) ? classes.null
@@ -96,7 +98,6 @@ const SetInterval: ComponentType<SetIntervalProps> = (props) => {
                                         : classes.errorButton}
                                 type='submit'
                                 color="primary">
-                                {/* <IconButton onClick={(event) => console.log(event)} type='submit' color="primary"> */}
                                 send
                         </IconButton>
                         <Typography>{description}</Typography>

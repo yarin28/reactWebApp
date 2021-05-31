@@ -1,9 +1,10 @@
+
 import  { ComponentType, useState } from "react"
 import SendToServer from "../../SendToServer";
 import  Chart from "../../Chart";
 import { withRouter } from "react-router-dom";
 /**
- * @brief the page where you can see the brightness sensor.
+ * @brief the page where you can see the water level sensor.
  the user is able to
  * request data from the server according to different scales(hours,days...).
  * the chart component will display the data that was sent after the request to
@@ -18,19 +19,20 @@ import { withRouter } from "react-router-dom";
  @param points is the array of point object that is shared
  * with all the page
  */
-const Brightness:ComponentType = ( props:any )=> {
-    const [points, pointsSet] = useState([{}]);
+  
+const Water:ComponentType = ( props:any )=> {
+    const [points, setPoints] = useState([{}]);
     return (
         <div>
-            <Chart name="brightness"  cords={points} condition={(y:number)=>{return y>30}}
-            setCords={pointsSet}/>
-            <SendToServer name="get days" link="brightness" query="/?days="
-            cords={points} setCords={pointsSet}></SendToServer>
-            <SendToServer name="get hours" link="brightness" query="/?hours="
-            cords={points} setCords={pointsSet}></SendToServer>
-            <SendToServer name="get weeks" link="brightness" query="/?weeks="
-            cords={points} setCords={pointsSet}></SendToServer>
+            <Chart name="water"  cords={points} condition={(y:number)=>{return y>80}}
+            setCords={setPoints}/>
+            <SendToServer name="get days" link="water" query="/?days="
+            cords={points} setCords={setPoints}></SendToServer>
+            <SendToServer name="get hours" link="water" query="/?hours="
+            cords={points} setCords={setPoints}></SendToServer>
+            <SendToServer name="get weeks" link="water" query="/?weeks="
+            cords={points} setCords={setPoints}></SendToServer>
         </div>
     )
 }
-export default withRouter(Brightness);
+export default withRouter(Water);

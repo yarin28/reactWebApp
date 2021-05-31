@@ -21,6 +21,10 @@ const Chart: ComponentType<ChartProps> = (props) => {
         return props.condition(value) ? 'green':'red';
 
     };
+    /**
+     * @brief the chart is constructed here.
+     * @returns the chart object.
+     */
     const chartData = useMemo(() => ({
         labels: 'dataset',
         datasets: [
@@ -31,6 +35,7 @@ const Chart: ComponentType<ChartProps> = (props) => {
                 borderColor: 'black',
                 borderWidth: 2,
                 pointBackgroundColor: (context: any) => { return chooseColorSign(context) },
+                //this is for the color of the points, it will use the passed function.
                 pointBorderColor: (context: any) => { return chooseColorSign(context) },
                 pointRadius: 2,
                 pointHoverRadius: 2,

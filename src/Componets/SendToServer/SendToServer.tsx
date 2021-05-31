@@ -28,6 +28,16 @@ const validate = (values: Partial<FormItems>) => {
     return errors;
 };
 interface SendToServerProps { name: string; link: string; query: string;cords:any;setCords:any }
+/**
+ * 
+ * @param name the name of the send
+ * @param link the link to send the request to 
+ * @param query the query that this send is responsible to (like hours or days)
+ * @param cords the array of points that the chart draws
+ * @param setCords the setter function to set those points
+ * 
+ * @returns 
+ */
 const SendToServer: ComponentType<SendToServerProps> = (props) => {
     enum Colors {
         defult = 0,
@@ -36,39 +46,40 @@ const SendToServer: ComponentType<SendToServerProps> = (props) => {
     }
     const classes = useStyles();
     const [value, setValue] = React.useState<number | string | Array<number | string>>(30);
+    //alerts
      const [openError, setOpenError] = React.useState(false);
      const [openSuccsess, setOpenSuccsess] = React.useState(false);
      const [openServerError, setOpenServerError] = React.useState(false);
      const [openThereIsNoDataError, setOpenThereIsNoDataError] = React.useState(false);
+     //to indicate the status of the request
  const [buttonColor, setButtonColor] = useState(0)
-
+    //on submit of the form
     const onSubmit = async (values: any) => {
         try {
             console.log(values);
-            const response = await fetch("http://10.0.0.12:8090/" + props.link + props.query + value);
+            const response = await fetch("http://192.168.1.27:8090/" + props.link + props.query + value);
             const data = await response.json();
+            //the server declined the request
             if (response.status ==406){
                 setOpenError(true);
             }
+            //the server accepted the request
             else{
             const realy_json = JSON.parse(data)
             console.log(data);
             // console.log(Date.parse(realy_json[0].x));
-            console.log(data===0);
             for (let cord of realy_json) {
                 addXY({ x: Date.parse(cord.x), y: cord.y });
             setButtonColor(Colors.green)
             setOpenSuccsess(true);
             }
         }}
+        //problem with network
         catch (e) {
             console.log(e);
             if(e.message =="Timeout"  ){
             setOpenServerError(true);
             }
-            else if(e instanceof TypeError) setOpenThereIsNoDataError(true);
-            else if(e instanceof SyntaxError) setOpenThereIsNoDataError(true);
-
         else{
             setOpenServerError(true);
         }
@@ -76,6 +87,7 @@ const SendToServer: ComponentType<SendToServerProps> = (props) => {
         }
         console.log("there was a send to the server ");
     }
+    //add a point to the array of ponts of the chart
     const addXY = async (xy: { x: number; y: number; }) => {
         props.setCords((oldArray:any)=> [...oldArray, xy]);
     };
@@ -148,6 +160,7 @@ const SendToServer: ComponentType<SendToServerProps> = (props) => {
                     </form>
                 )}
             />
+            {/* the alerts that could be displayed by the server */}
             <PopUpMessage severity="success" message="the send was recived by the server" open={openSuccsess}setOpen={setOpenSuccsess}></PopUpMessage>
             <PopUpMessage severity="error" message="there is a problem with arduino, please try again later" open={openError}setOpen={setOpenError}></PopUpMessage>
             <PopUpMessage severity="warning" message="there is no data in the database for this query" open={openThereIsNoDataError}setOpen={setOpenServerError}></PopUpMessage>

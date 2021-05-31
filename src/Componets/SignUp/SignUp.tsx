@@ -1,12 +1,8 @@
-import { Form, Field } from 'react-final-form';
-import React, { ComponentType, useEffect, useRef, useState } from 'react';
+import React, { ComponentType,  useState } from 'react';
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import TextField from '@material-ui/core/TextField';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
-import Checkbox from '@material-ui/core/Checkbox';
-import Link from '@material-ui/core/Link';
 import Paper from '@material-ui/core/Paper';
 import Box from '@material-ui/core/Box';
 import Grid from '@material-ui/core/Grid';
@@ -15,7 +11,6 @@ import Typography from '@material-ui/core/Typography';
 import { makeStyles, Theme } from '@material-ui/core/styles';
 import { useHistory } from 'react-router-dom';
 import Copyright from '../Copyright'
-import { AirlineSeatLegroomReduced } from '@material-ui/icons';
 import Snackbar from '@material-ui/core/Snackbar';
 import MuiAlert, { AlertProps } from '@material-ui/lab/Alert';
 function Alert(props: AlertProps) {
@@ -57,6 +52,16 @@ const useStyles = makeStyles((theme: Theme) => ({
 }));
 
 interface SignUpProps { setLoged: any }
+
+/**
+ * @brief the sign up component, will let the user submit a form to the server and
+ * provided the user has the correct credentials will change the setLoged
+ * variable and allow the user th use the webApp indefinably.
+ * 
+ * @param setLoged → provides the global function to change  if the user has logged in.
+ * 
+ * @returns  the login screen
+ */
 const SignUp: ComponentType<SignUpProps> = (props) => {
   const history = useHistory();
   const [ cantLogIn,setCantLogIn ] = useState(false);
@@ -69,8 +74,14 @@ const SignUp: ComponentType<SignUpProps> = (props) => {
     const handleChangeP = (event: any) => {
         setPassword(event.target.value);
     }
+  /**
+   * @brief will send the cardinals to the server to log them in.
+   * if the server returns true the user will be able to use the  login screen
+   * with his new credentials to the webApp.
+   * @param event the submit parameters
+   */
     const handleSubmit = async (event: any) => {
-        const url: string = "http://10.0.0.12:8090/login/sign_up/" + "?"
+        const url: string = "http://192.168.1.27:8090/login/sign_up/" + "?"
             + "username=" + username + "&password=" + password;
         const response = await fetch(url, 
         {

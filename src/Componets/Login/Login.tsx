@@ -11,70 +11,47 @@ import Box from '@material-ui/core/Box';
 import Grid from '@material-ui/core/Grid';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
-import { makeStyles, Theme } from '@material-ui/core/styles';
 import { Route, useHistory, Switch } from "react-router-dom";
 import Copyright from '../Copyright'
 import { Snackbar } from '@material-ui/core';
 import MuiAlert, { AlertProps } from '@material-ui/lab/Alert';
-const chickenPhotos = ["https://i.pinimg.com/originals/01/93/f5/0193f589c7c3bc84d00fd0899b004706.jpg",
-"https://betterchickencommitment.com/static/c4c65646cd882eb3b25feba0144c9113/a54c6/white-chicken-cutout-2.png",
-"https://cdn.sanity.io/images/92ui5egz/~production/1f0e40ffac1592c3c9978cff9e5ec0d0b4901f23-1920x1080.jpg?w=1920&h=1080&auto=format",
-"https://a4nh.cgiar.org/files/2017/10/Chicken-in-Timor-Leste-Johanna-Wong.jpg",
-"https://assets.farmsanctuary.org/content/uploads/2020/05/27060521/2018_08-07_FSNY_Georgia_Hardstark_hen_DSC_1000_CREDIT_Farm_Sanctuary-scaled.jpg",
-"https://a-z-animals.com/media/2019/11/Chicken-rooster-in-grass.jpg",
-"https://www.backwoodshome.com/bhm/wp-content/uploads/2015/12/chicken-3727097_1920.jpg",
-"https://www.adcogov.org/sites/default/files/chicken%201%20-%20getty.jpg"]
-const useStyles = makeStyles((theme: Theme) => ({
-  root: {
-    height: '100vh',
-  },
-  image: {
-    // backgroundImage: 'url(https://source.unsplash.com/random)',
-    backgroundImage: 'url('+chickenPhotos[Math.floor(Math.random()*chickenPhotos.length)]+')',
-    backgroundRepeat: 'no-repeat',
-    backgroundColor:
-      theme.palette.type === 'light' ? theme.palette.grey[50] : theme.palette.grey[900],
-    backgroundSize: 'cover',
-    backgroundPosition: 'center',
-  },
-  paper: {
-    margin: theme.spacing(8, 4),
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'center',
-  },
-  avatar: {
-    margin: theme.spacing(1),
-    backgroundColor: theme.palette.secondary.main,
-  },
-  form: {
-    width: '100%', // Fix IE 11 issue.
-    marginTop: theme.spacing(1),
-  },
-  submit: {
-    margin: theme.spacing(3, 0, 2),
-  },
-}));
+import {useStyles,chickenPhotos} from './Login.styles'
 
 function Alert(props: AlertProps) {
   return <MuiAlert elevation={6} variant="filled" {...props} />;
 }
+
 interface LoginProps { setLoged: any }
+/**
+ * @brief the login component, will let the user submit a form to the server and
+ * provided the user has the correct credentials will change the setLoged
+ * variable and allow the user th use the webApp indefinably.
+ * 
+ * @param setLoged → provides the global function to change  if the user has logged in.
+ * 
+ * @returns  the login screen
+ */
 const Login: ComponentType<LoginProps> = (props) => {
   const [ cantLogIn,setCantLogIn ] = useState(false);
   const history = useHistory();
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const classes = useStyles();
-  const handleChangeU = (event: any) => {
+  const handleChangeUserName = (event: any) => {
     setUsername(event.target.value);
   }
-  const handleChangeP = (event: any) => {
+  const handleChangePassword = (event: any) => {
     setPassword(event.target.value);
   }
+  /**
+   * @brief will send the cardinals to the server to check if they are legit,
+   * if the server returns true the user will be able to use the webApp.
+   * Otherwise the user will get an alert that the username\password were incorrect.
+   * @param event the submit parameters
+   */
   const handleSubmit = async (event: any) => {
     try{
-        const url: string = "http://10.0.0.12:8090/login/login/" + "?"
+        const url: string = "http://192.168.1.27:8090/login/login/" + "?"
       + "username=" + username + "&password=" + password;
     const response = await fetch(url);
     const data = await response.json();
@@ -120,7 +97,7 @@ const Login: ComponentType<LoginProps> = (props) => {
               autoComplete="username"
               autoFocus
               value={username}
-              onChange={handleChangeU}
+              onChange={handleChangeUserName}
             />
             <TextField
               variant="outlined"
@@ -133,7 +110,7 @@ const Login: ComponentType<LoginProps> = (props) => {
               type="password"
               id="password"
               autoComplete="current-password"
-              onChange={handleChangeP}
+              onChange={handleChangePassword}
             />
             <Button
               //   type="b"

@@ -1,9 +1,7 @@
 
 
-import React, { ComponentType, useEffect, useRef, useState } from 'react';
-import ReactDOM from 'react-dom';
-import { Form, Field } from 'react-final-form';
-import { w3cwebsocket as WebSocket } from 'websocket'
+import React, { ComponentType, useState } from 'react';
+import { Form} from 'react-final-form';
 import {
     Paper,
     Slider,
@@ -19,18 +17,15 @@ interface FormItems { slider: number }
 const validate = (values: Partial<FormItems>) => {
     const errors: Partial<FormItems> = {};
 
-    // if (!values.firstName) {
-    //     errors.firstName = 'Required';
-    // }
-    // if (!values.lastName) {
-    //     errors.lastName = 'Required';
-    // }
-    // if (!values.email) {
-    //     errors.email = 'Required';
-    // }
     return errors;
 };
 interface PumpProps { name: string }
+/**
+ * 
+ * @brief the pump component is reliable on sending commands to the water pump.
+ * the user can send the command and the component will notify the user via alert about the command status.
+ * @returns 
+ */
 const Pump: ComponentType<PumpProps> = (props) => {
     const sliderLimit = 1000;
     enum Colors {
@@ -47,24 +42,23 @@ const Pump: ComponentType<PumpProps> = (props) => {
     const [openServerError, setOpenServerError] = React.useState(false);
     const onSubmit = async (values: any) => {
         try {
-            console.log(values);
-            const response = await fetch("http://10.0.0.12:8090/pump/?milliseconds=" + value);
-            const data = await response.json();
-            console.log(response);
-            if (response.status==406) {
+            const response = await fetch("http://192.168.1.27:8090/pump/?milliseconds=" + value);
+            //the server denied the request
+            if (response.status===406) {
                 setButtonColor(Colors.red);
                 setOpenError(true);}
-            else if (response.status==201) {
+                //the server accepted the request
+            else if (response.status===201) {
                 setButtonColor(Colors.green);
                 setOpenSuccsess(true);
             }
+            //there was an error with the delivery of the command(network)
             else {
                 setButtonColor(Colors.red)
                 setOpenServerError(true);
             }
         }
         catch (e) {
-                console.log(e);
             if(e.message==='Timeout'){
             setOpenServerError(true);
             }
@@ -78,11 +72,7 @@ const Pump: ComponentType<PumpProps> = (props) => {
     const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         setValue(event.target.value === '' ? '' : Number(event.target.value));
     };
-    const buttonClassChange = () => {
-        if (buttonColor === 0) return classes.null
-        if (buttonColor === 1) return classes.sentButton
-        else return classes.errorButton
-    }
+    //for the slider
     const handleBlur = () => {
         if (value < 0) {
             setValue(0);
@@ -144,6 +134,7 @@ const Pump: ComponentType<PumpProps> = (props) => {
                     </form>
                 )}
             />
+            {/* the alerts that the web app can raise */}
             <PopUpMessage severity="success" message="the send was recived by the server" open={openSuccsess} setOpen={setOpenSuccsess}></PopUpMessage>
             <PopUpMessage severity="error" message="there is a problem with arduino, please try again later" open={openError} setOpen={setOpenError}></PopUpMessage>
             <PopUpMessage severity="error" message="the server has could not be reached" open={openServerError} setOpen={setOpenServerError}></PopUpMessage>

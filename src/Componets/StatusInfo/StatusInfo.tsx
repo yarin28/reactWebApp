@@ -16,6 +16,16 @@ interface StatusInfoProps {
   description: string;
   isGoodCallback: (n: number) => boolean;
 };
+/**
+ * 
+  @param ip: the ip to send the request to. 
+  @param whereToRegister: the sensor path.
+  @param BadMaterialUiIcon: the icon when the bad areas of the sensor is on display( for eample : the water levle is below 10%).
+  @param GoodMaterialUiIcon: the icon when the good areas of the sensor is on display( for eample : the water levle is above 10%) .
+  @param description: what the sensor is sensing.
+  @param isGoodCallback: the function to determine if the reading from te sensor is a bad one.
+ * @returns 
+ */
 const StatusInfo: ComponentType<StatusInfoProps> = (props) => {
   const classes = useStyles();
   const client = useRef<null | WebSocket>(null);

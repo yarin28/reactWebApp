@@ -1,9 +1,12 @@
-import React, { ComponentType, useCallback, useEffect, useRef, useState } from "react"
+import  { ComponentType, useEffect, useRef, useState } from "react"
 import { Grid, Typography } from "@material-ui/core";
 import IconButton from '@material-ui/core/IconButton';
 import MeetingRoomIcon from '@material-ui/icons/MeetingRoom';
 import { useStyles } from "./Door.styles"
-import { METHODS } from "http";
+
+/**
+ * 
+ */
 interface DoorProps {
     ip: string;
     place: string
@@ -12,6 +15,11 @@ interface DoorProps {
     query: string
     GoodMaterialUiIcon: any;
 };
+/**
+ * 
+ * @param props to customize every door.
+ * @returns the door componets allow the user to control the door, open and close it and see the status right now.
+ */
 const Door: ComponentType<DoorProps> = (props) => {
   const client = useRef<null | WebSocket>(null);
     const classes = useStyles();
@@ -26,6 +34,10 @@ const Door: ComponentType<DoorProps> = (props) => {
     }
     // will have to be an prop 
   }, []);
+  /**
+   * every time the client receives a message this function will be called to process it.
+   * it will take what it needs and will update the status if nessesery.
+   */
   useEffect(() => {
     if (client.current)
       client.current.onmessage = (message: any) => {
@@ -35,16 +47,19 @@ const Door: ComponentType<DoorProps> = (props) => {
           setChecked(true);
         }
         catch (e) {
-          console.log("cought the not irtratble shit1")
         }
       };
   }, []);
-    const handleCheck = async () => {
+  /**
+   * 
+   * @returns will send the server the request and awaut the answer, will tell
+   * the user what is going on with the request
+   */
+    const handleSubmit = async () => {
         setChecked(!checked);
         let boolToTxt: string = "";
         try {
             console.log(checked);
-            //there is someting i dont understand, it will not update in time
             if (!checked) boolToTxt = "open";
              else {boolToTxt = "close";}
             const response = await fetch("http://" + props.ip + "/" + props.place + "/" + props.query + boolToTxt, 
@@ -77,7 +92,7 @@ return (
         <Grid component="label" container alignItems="center" spacing={1}>
             <Grid item>Close</Grid>
             <Grid item>
-                <IconButton color="primary" aria-label="control the door" component="span" onClick={handleCheck} className={!checked ? classes.green : classes.red}  >
+                <IconButton color="primary" aria-label="control the door" component="span" onClick={handleSubmit} className={!checked ? classes.green : classes.red}  >
                     <MeetingRoomIcon></MeetingRoomIcon>
                 </IconButton>
             </Grid>

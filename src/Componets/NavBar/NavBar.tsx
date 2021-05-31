@@ -1,6 +1,6 @@
-import React, { ComponentType, useCallback, useState } from "react"
+import React, { ComponentType,} from "react"
 import { useStyles } from "./NavBar.styles"
-import { AppBar, Button, Divider, Drawer, GridList, GridListTile, List, ListItem, ListItemIcon, ListItemText, Typography, useMediaQuery, useTheme } from "@material-ui/core"
+import { AppBar, Divider, Drawer, List, ListItem, ListItemIcon, ListItemText, Typography,  useTheme } from "@material-ui/core"
 import Toolbar from "@material-ui/core/Toolbar";
 import IconButton from "@material-ui/core/IconButton";
 import MenuIcon from "@material-ui/icons/Menu";
@@ -12,23 +12,28 @@ import HomeSharpIcon from '@material-ui/icons/HomeSharp';
 import DashboardSharpIcon from '@material-ui/icons/DashboardSharp';
 import InfoSharpIcon from '@material-ui/icons/InfoSharp';
 import Brightness7Icon from '@material-ui/icons/Brightness7';
-import { Route, useHistory, Switch } from "react-router-dom";
+import {useHistory} from "react-router-dom";
 import LiveTvSharpIcon from '@material-ui/icons/LiveTvSharp';
 import LocalDrinkIcon from '@material-ui/icons/LocalDrink';
 import Chicken from '../../Chicken.svg'
 import Food from '../../Food.svg'
 import Temp from '../../temp.svg'
-import Motor from '../../motor.svg'
 import FlipCameraAndroidIcon from '@material-ui/icons/FlipCameraAndroid';
 import OpacityIcon from '@material-ui/icons/Opacity';
+
+/**
+ * @brief the nav bar for the web app, with in it is possible to navigate to all
+ * the pages in the app.
+ * 
+ * the nav bar containes a list of all the paths that the user can take.
+ * every path has its own icon and name.
+ */
 const NavBar: ComponentType = () => {
     console.log('rendered the NavBar');
     const history = useHistory();
     console.log(history);
     const classes = useStyles();
     const theme = useTheme();
-    const isMobile = useMediaQuery(theme.breakpoints.down("xs"));
-    const [value, setValue] = React.useState('recents');
     const [open, setOpen] = React.useState(false);
 
     const handleDrawerOpen = () => {
@@ -115,7 +120,7 @@ const NavBar: ComponentType = () => {
                         <img src={Food} className={classes.svg} alt="how many chickens" />
                         <ListItemText primaryTypographyProps={{ color: "secondary" }} primary="Food" />
                     </ListItem>
-                    <ListItem button onClick={() => history.push("/chart")}>
+                    <ListItem button onClick={() => history.push("/live_stream")}>
                         <ListItemIcon >
                             <LiveTvSharpIcon color="secondary"></LiveTvSharpIcon>
                         </ListItemIcon>

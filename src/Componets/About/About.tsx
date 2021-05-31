@@ -94,7 +94,7 @@ const Chickens = () =>{ return <div>{chickenPhotos.map((element)=>
         <>
         <Typography className={classes.root}>
                         <Typewriter
-              delay={80}
+              delay={1}
               string={text }
               stopBlinkinOnComplete
               onComplete={()=>{}}

@@ -17,6 +17,7 @@ import { theme } from "./theme"
 import Brighness from './Componets/Pages/Brightness'
 import Humidity from './Componets/Pages/Humidity'
 import Temperture from './Componets/Pages/Temperature'
+import Water from './Componets/Pages/Water'
 import SignInSide from './Componets/Login'
 import SignUp from './Componets/SignUp'
 import SettingsBrightnessIcon from '@material-ui/icons/SettingsBrightness';
@@ -30,7 +31,7 @@ import VideoStream from "./Componets/VideoStream"
 
 const App: ComponentType = () => {
   const classes = useStyles();
-  const [loged,setLoged] = useState(true);
+  const [loged,setLoged] = useState(false);
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline></CssBaseline>
@@ -60,6 +61,9 @@ const App: ComponentType = () => {
           <Route path="/pump" exact>
 <Pump name="water"></Pump>
           </Route>
+          <Route path="/water" exact>
+<Water></Water>
+          </Route>
           <Route path="/humidity" exact>
             <Humidity></Humidity>
           </Route>
@@ -79,7 +83,7 @@ const App: ComponentType = () => {
             <DoorPage></DoorPage>
           </Route>
           <Route path="/interval" exact>
-      <SetInterval ip="10.0.0.12:8090" place="/interval/" query="?set=" name="interval"></SetInterval>
+      <SetInterval ip="192.168.1.27:8090" place="/interval/" query="?set=" name="interval"></SetInterval>
           </Route>
         </Switch>
       </Router> :
@@ -90,7 +94,7 @@ const App: ComponentType = () => {
           <Route path="/signUp" exact>
           <SignUp setLoged={setLoged} ></SignUp>
           </Route>
-          <Route path = "/" exact>
+          <Route path = "/" >
             <SignInSide  setLoged={setLoged}></SignInSide>
           </Route>
         </Switch>

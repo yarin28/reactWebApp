@@ -1,8 +1,6 @@
 
-import React, { ComponentType, useEffect, useRef, useState } from 'react';
-import ReactDOM from 'react-dom';
-import { Form, Field } from 'react-final-form';
-import { w3cwebsocket as WebSocket } from 'websocket'
+import React, { ComponentType,useState } from 'react';
+import { Form } from 'react-final-form';
 import {
     Paper,
     Slider,
@@ -17,19 +15,17 @@ import PopUpMessage from '../PopUpMessage';
 interface FormItems { slider: number }
 const validate = (values: Partial<FormItems>) => {
     const errors: Partial<FormItems> = {};
-
-    // if (!values.firstName) {
-    //     errors.firstName = 'Required';
-    // }
-    // if (!values.lastName) {
-    //     errors.lastName = 'Required';
-    // }
-    // if (!values.email) {
-    //     errors.email = 'Required';
-    // }
     return errors;
 };
+
 interface MotorProps { name: string }
+
+/**
+ * 
+ * @brief the motor controller, will be able to send the motor steps and the
+ * motor will execute the given steps.
+ * @return it will aleart the user about the status of the  request to the server.
+ */
 const Motor: ComponentType<MotorProps> = (props) => {
     const sliderLimit = 10000;
     enum Colors {
@@ -44,17 +40,15 @@ const Motor: ComponentType<MotorProps> = (props) => {
     const [openError, setOpenError] = React.useState(false);
     const [openSuccsess, setOpenSuccsess] = React.useState(false);
     const [openServerError, setOpenServerError] = React.useState(false);
-    const [openThereIsNoDataError, setOpenThereIsNoDataError] = React.useState(false);
     const onSubmit = async (values: any) => {
         try {
-            console.log(values);
-            const response = await fetch("http://10.0.0.12:8090/motor/?steps=" + value);
-            const data = await response.json();
-            console.log(response);
-            if (response.status==406) {
+            const response = await fetch("http://192.168.1.27:8090/motor/?steps=" + value);
+             // the response was not correct / there was an error inside the server
+            if (response.status===406) {
                 setButtonColor(Colors.red);
                 setOpenError(true);}
-            else if (response.status==201) {
+                // the response was correct and accepted by the server
+            else if (response.status===201) {
                 setButtonColor(Colors.green);
                 setOpenSuccsess(true);
             }
@@ -64,7 +58,6 @@ const Motor: ComponentType<MotorProps> = (props) => {
             }
         }
         catch (e) {
-                console.log(e);
             if(e.message==='Timeout'){
             setOpenServerError(true);
             }
@@ -77,11 +70,6 @@ const Motor: ComponentType<MotorProps> = (props) => {
     const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         setValue(event.target.value === '' ? '' : Number(event.target.value));
     };
-    const buttonClassChange = () => {
-        if (buttonColor === 0) return classes.null
-        if (buttonColor === 1) return classes.sentButton
-        else return classes.errorButton
-    }
     const handleBlur = () => {
         if (value < 0) {
             setValue(0);
@@ -143,6 +131,7 @@ const Motor: ComponentType<MotorProps> = (props) => {
                     </form>
                 )}
             />
+            {/* those are the messages alerts that the user will be able to get */}
             <PopUpMessage severity="success" message="the send was recived by the server" open={openSuccsess} setOpen={setOpenSuccsess}></PopUpMessage>
             <PopUpMessage severity="error" message="there is a problem with arduino, please try again later" open={openError} setOpen={setOpenError}></PopUpMessage>
             <PopUpMessage severity="error" message="the server has could not be reached" open={openServerError} setOpen={setOpenServerError}></PopUpMessage>

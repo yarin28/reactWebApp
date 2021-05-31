@@ -14,13 +14,13 @@ const DoorPage: ComponentType = (props) => {
     const isLocked = (n:number) :boolean => {return (n===0);}
     return (
         <div className={classes.container}>
-            {/* <StatusInfo ip="10.0.0.12" isGoodCallback={isLocked} BadMaterialUiIcon={LockOpenIcon} GoodMaterialUiIcon={LockIcon} whereToRegister="door/register" description="the status of the door" /> */}
+            {/* <StatusInfo ip="192.168.1.27" isGoodCallback={isLocked} BadMaterialUiIcon={LockOpenIcon} GoodMaterialUiIcon={LockIcon} whereToRegister="door/register" description="the status of the door" /> */}
             <StatusInfo ip="ws://localhost:8090/" isGoodCallback={isLocked} BadMaterialUiIcon={LockOpenIcon} GoodMaterialUiIcon={LockIcon} whereToRegister="door" description="the status of the door" />
             <Typography variant="h5"> this the door control page, </Typography>
             <Typography variant="h5">in here you can send command to, </Typography>
                    <Door 
                 ip="localhost:8090"
-                // ip="10.0.0.12:8090"
+                // ip="192.168.1.27:8090"
                 place="door"
                 query="?set="
                 whereToRegister="door" 
