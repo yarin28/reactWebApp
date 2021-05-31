@@ -21,13 +21,13 @@ function Alert(props: AlertProps) {
   return <MuiAlert elevation={6} variant="filled" {...props} />;
 }
 
-interface LoginProps { setLoged: any }
+interface LoginProps { setlogged: any }
 /**
  * @brief the login component, will let the user submit a form to the server and
- * provided the user has the correct credentials will change the setLoged
+ * provided the user has the correct credentials will change the setlogged
  * variable and allow the user th use the webApp indefinably.
  * 
- * @param setLoged → provides the global function to change  if the user has logged in.
+ * @param setlogged → provides the global function to change  if the user has logged in.
  * 
  * @returns  the login screen
  */
@@ -58,7 +58,7 @@ const Login: ComponentType<LoginProps> = (props) => {
     console.log(data);
         if(data===true)
         {
-        props.setLoged(true);
+        props.setlogged(true);
         }
         setCantLogIn(true);
       }

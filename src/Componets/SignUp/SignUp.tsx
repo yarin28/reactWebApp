@@ -51,14 +51,14 @@ const useStyles = makeStyles((theme: Theme) => ({
     },
 }));
 
-interface SignUpProps { setLoged: any }
+interface SignUpProps { setlogged: any }
 
 /**
  * @brief the sign up component, will let the user submit a form to the server and
- * provided the user has the correct credentials will change the setLoged
+ * provided the user has the correct credentials will change the setlogged
  * variable and allow the user th use the webApp indefinably.
  * 
- * @param setLoged → provides the global function to change  if the user has logged in.
+ * @param setlogged → provides the global function to change  if the user has logged in.
  * 
  * @returns  the login screen
  */
@@ -90,11 +90,11 @@ const SignUp: ComponentType<SignUpProps> = (props) => {
         const data = await response.json();
         if(data==true)
         {
-        props.setLoged(true);
+        props.setlogged(true);
         history.push("/dashboard");
         }
         setCantLogIn(true);
-        props.setLoged(true);
+        props.setlogged(true);
     }
  const handleErrorClose = (event?: any, reason?: string) => {
     if (reason === 'clickaway') {

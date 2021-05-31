@@ -24,6 +24,7 @@ interface StatusInfoProps {
   @param GoodMaterialUiIcon: the icon when the good areas of the sensor is on display( for eample : the water levle is above 10%) .
   @param description: what the sensor is sensing.
   @param isGoodCallback: the function to determine if the reading from te sensor is a bad one.
+  @brief will show the ser the latest reading of the sensor useing the webSocket protocol.
  * @returns 
  */
 const StatusInfo: ComponentType<StatusInfoProps> = (props) => {
