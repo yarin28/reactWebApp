@@ -7,20 +7,18 @@ import { useStyles } from './DoorPage.styles'
 import StatusInfo from "../../StatusInfo";
 import LockIcon from '@material-ui/icons/Lock';
 import LockOpenIcon from '@material-ui/icons/LockOpen';
-
+import ip from "../../../Ip"
 const delay = (ms: number) => new Promise(res => setTimeout(res, ms));
 const DoorPage: ComponentType = (props) => {
     const classes = useStyles();
     const isLocked = (n:number) :boolean => {return (n===0);}
     return (
         <div className={classes.container}>
-            {/* <StatusInfo ip="10.0.0.12" isGoodCallback={isLocked} BadMaterialUiIcon={LockOpenIcon} GoodMaterialUiIcon={LockIcon} whereToRegister="door/register" description="the status of the door" /> */}
             <StatusInfo ip="ws://localhost:8090/" isGoodCallback={isLocked} BadMaterialUiIcon={LockOpenIcon} GoodMaterialUiIcon={LockIcon} whereToRegister="door" description="the status of the door" />
             <Typography variant="h5"> this the door control page, </Typography>
             <Typography variant="h5">in here you can send command to, </Typography>
                    <Door 
-                ip="localhost:8090"
-                // ip="10.0.0.12:8090"
+                ip={ ip }
                 place="door"
                 query="?set="
                 whereToRegister="door" 

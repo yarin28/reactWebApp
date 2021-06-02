@@ -10,7 +10,7 @@ import WhatshotIcon from '@material-ui/icons/Whatshot';
 import AcUnitIcon from '@material-ui/icons/AcUnit';
 import LockIcon from '@material-ui/icons/Lock';
 import LockOpenIcon from '@material-ui/icons/LockOpen';
-import Door from '../Door'
+import ip from "../../Ip"
 const Dashboard: ComponentType = () => {
     const classes = useStyles()
     const Buttons = [];
@@ -31,7 +31,7 @@ const Dashboard: ComponentType = () => {
                 <Grid item >
                     <StatusInfo
                         isGoodCallback={isNight}
-                        ip={ "ws://"+"10.0.0.12:8090"+"/" }
+                        ip={ "ws://"+ip+":8090"+"/" }
                         whereToRegister="brightness"
                         GoodMaterialUiIcon={SettingsBrightnessIcon}
                         BadMaterialUiIcon={NightsStayIcon}
@@ -41,7 +41,7 @@ const Dashboard: ComponentType = () => {
                 <Grid item >
                     <StatusInfo
                         isGoodCallback={isClosed}
-                        ip={ "ws://"+"10.0.0.12:8090"+"/" }
+                        ip={ "ws://"+ip+":8090"+"/" }
                         whereToRegister="door"
                         BadMaterialUiIcon={LockOpenIcon}
                         GoodMaterialUiIcon={LockIcon}
@@ -51,7 +51,7 @@ const Dashboard: ComponentType = () => {
                 <Grid item >
                     <StatusInfo
                         isGoodCallback={isWater}
-                        ip={ "ws://"+"10.0.0.12:8090"+"/" }
+                        ip={ "ws://"+ip+":8090"+"/" }
                         whereToRegister="pump"
                         BadMaterialUiIcon={LocalDrinkIcon}
                         GoodMaterialUiIcon={LocalDrinkIcon}
@@ -62,7 +62,7 @@ const Dashboard: ComponentType = () => {
                     <StatusInfo
 
                         isGoodCallback={isTemperature}
-                        ip={ "ws://"+"10.0.0.12:8090"+"/" }
+                        ip={ "ws://"+ip+":8090"+"/" }
                         whereToRegister="temperature"
                         GoodMaterialUiIcon={FormatColorResetIcon}
                         BadMaterialUiIcon={LocalDrinkIcon}
@@ -71,7 +71,8 @@ const Dashboard: ComponentType = () => {
                 <Grid item >
                     <StatusInfo
                         isGoodCallback={isHumidityHealthy}
-                        ip={ "ws://"+"10.0.0.12:8090"+"/" }
+                        ip={ "ws://"+ip+":8090"+"/" }
+
                         whereToRegister="humidity"
                         GoodMaterialUiIcon={WhatshotIcon}
                         BadMaterialUiIcon={AcUnitIcon}

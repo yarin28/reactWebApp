@@ -13,6 +13,7 @@ import {
 } from '@material-ui/core';
 import { useStyles } from './Motor.styles';
 import PopUpMessage from '../PopUpMessage';
+import ip from "../../Ip"
 // Picker
 interface FormItems { slider: number }
 const validate = (values: Partial<FormItems>) => {
@@ -48,7 +49,7 @@ const Motor: ComponentType<MotorProps> = (props) => {
     const onSubmit = async (values: any) => {
         try {
             console.log(values);
-            const response = await fetch("http://10.0.0.12:8090/motor/?steps=" + value);
+            const response = await fetch("http://"+ip+":8090/motor/?steps=" + value);
             const data = await response.json();
             console.log(response);
             if (response.status==406) {
@@ -68,6 +69,7 @@ const Motor: ComponentType<MotorProps> = (props) => {
             if(e.message==='Timeout'){
             setOpenServerError(true);
             }
+            setOpenServerError(true);
             setButtonColor(Colors.red)
         }
     }

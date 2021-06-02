@@ -14,6 +14,7 @@ import {
 } from '@material-ui/core';
 import { useStyles } from '../Motor/Motor.styles';
 import PopUpMessage from '../PopUpMessage';
+import ip from '../../Ip'
 // Picker
 interface FormItems { slider: number }
 const validate = (values: Partial<FormItems>) => {
@@ -48,7 +49,7 @@ const Pump: ComponentType<PumpProps> = (props) => {
     const onSubmit = async (values: any) => {
         try {
             console.log(values);
-            const response = await fetch("http://10.0.0.12:8090/pump/?milliseconds=" + value);
+            const response = await fetch("http://"+ip+":8090/pump/?milliseconds=" + value);
             const data = await response.json();
             console.log(response);
             if (response.status==406) {

@@ -1,11 +1,8 @@
-import { Form, Field } from 'react-final-form';
-import React, { ComponentType, useEffect, useRef, useState } from 'react';
+import  { ComponentType,  useRef, useState } from 'react';
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import TextField from '@material-ui/core/TextField';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
-import Checkbox from '@material-ui/core/Checkbox';
 import Link from '@material-ui/core/Link';
 import Paper from '@material-ui/core/Paper';
 import Box from '@material-ui/core/Box';
@@ -18,6 +15,7 @@ import Copyright from '../Copyright'
 import { AirlineSeatLegroomReduced } from '@material-ui/icons';
 import Snackbar from '@material-ui/core/Snackbar';
 import MuiAlert, { AlertProps } from '@material-ui/lab/Alert';
+import ip from "../../Ip"
 function Alert(props: AlertProps) {
   return <MuiAlert elevation={6} variant="filled" {...props} />;
 }
@@ -70,8 +68,10 @@ const SignUp: ComponentType<SignUpProps> = (props) => {
         setPassword(event.target.value);
     }
     const handleSubmit = async (event: any) => {
-        const url: string = "http://10.0.0.12:8090/login/sign_up/" + "?"
+
+        const url: string = "http://"+ip+"/login/sign_up/" + "?"
             + "username=" + username + "&password=" + password;
+            try{
         const response = await fetch(url, 
         {
             method: 'POST',
@@ -82,8 +82,13 @@ const SignUp: ComponentType<SignUpProps> = (props) => {
         props.setLoged(true);
         history.push("/dashboard");
         }
+        else{
         setCantLogIn(true);
-        props.setLoged(true);
+        props.setLoged(true);}
+}
+catch (e){
+        setCantLogIn(true);
+        props.setLoged(true);}
     }
  const handleErrorClose = (event?: any, reason?: string) => {
     if (reason === 'clickaway') {
