@@ -6,13 +6,6 @@ interface VideoStreamParams {
     wsUrl: string;
 }
 
-/**
- * 
- * @param wsUrl the url to register to recive the stream
- * @prarm showFrames the option to show the stream
- * @brief will show the user the camera stream from the jetson
- * @returns 
- */
 const VideoStream: ComponentType<VideoStreamParams> = ({ wsUrl, showFrames }) => {
     const client = useRef<WebSocketClient>()
     const lastTime = useRef<Date>()

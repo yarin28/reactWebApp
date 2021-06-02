@@ -8,7 +8,9 @@ import {
 import HomePage from "./Componets/Pages/HomePage"
 import './App.css';
 import Dashboard from './Componets/Dashboard';
+import Chart from './Componets/Chart';
 import NavBar from './Componets/NavBar'
+import StatusInfo from './Componets/StatusInfo'
 import { useStyles } from './App.styles'
 import { CssBaseline, ThemeProvider, Typography } from '@material-ui/core';
 import { theme } from "./theme"
@@ -18,6 +20,8 @@ import Temperture from './Componets/Pages/Temperature'
 import Water from './Componets/Pages/Water'
 import SignInSide from './Componets/Login'
 import SignUp from './Componets/SignUp'
+import SettingsBrightnessIcon from '@material-ui/icons/SettingsBrightness';
+import Door from './Componets/Door';
 import DoorPage from './Componets/Pages/DoorPage';
 import SetInterval from './Componets/Pages/SetInterval';
 import Motor from "./Componets/Motor"
@@ -28,13 +32,11 @@ import ip from "./Ip"
 
 const App: ComponentType = () => {
   const classes = useStyles();
-  // is the user logged?
-  const [logged,setLogged] = useState(false);
+  const [loged,setLoged] = useState(false);
   return (
-    //the global theme
     <ThemeProvider theme={theme}>
       <CssBaseline></CssBaseline>
-    {logged ?
+    {loged ?
       <Router>
         <NavBar />
         <div className={classes.appBarSpacer}></div>
@@ -49,9 +51,10 @@ const App: ComponentType = () => {
             <Dashboard />
           </Route>
           <Route path="/chart" exact>
+            {/* <Chart name="brightness" link="brightness" /> */}
           </Route>
           <Route path="/signUp" exact>
-          <SignUp setlogged={setLogged}></SignUp>
+          <SignUp setLoged={setLoged}></SignUp>
           </Route>
           <Route path="/about" exact>
             <About></About>
@@ -94,10 +97,10 @@ const App: ComponentType = () => {
       <Router> 
         <Switch>
           <Route path="/signUp" exact>
-          <SignUp setlogged={setLogged} ></SignUp>
+          <SignUp setLoged={setLoged} ></SignUp>
           </Route>
           <Route path = "/" >
-            <SignInSide  setlogged={setLogged}></SignInSide>
+            <SignInSide  setLoged={setLoged}></SignInSide>
           </Route>
         </Switch>
       </Router> 
