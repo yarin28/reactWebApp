@@ -24,6 +24,7 @@ import Motor from "./Componets/Motor"
 import About from "./Componets/About"
 import Pump from "./Componets/Pump"
 import VideoStream from "./Componets/VideoStream"
+import ip from "./Ip"
 
 const App: ComponentType = () => {
   const classes = useStyles();
@@ -42,7 +43,7 @@ const App: ComponentType = () => {
            <HomePage />
           </Route>
           <Route path="/live_stream" exact>
-            <VideoStream wsUrl="ws://10.0.0.13:8000/video_feed" showFrames></VideoStream>
+            <VideoStream wsUrl={ "ws://+"+ip+":8000/video_feed" } showFrames></VideoStream>
           </Route>
           <Route path="/dash" exact>
             <Dashboard />
@@ -80,7 +81,11 @@ const App: ComponentType = () => {
             <DoorPage></DoorPage>
           </Route>
           <Route path="/interval" exact>
+<<<<<<< HEAD
       <SetInterval ip="192.168.1.27:8090" place="/interval/" query="?set=" name="interval"></SetInterval>
+=======
+      <SetInterval ip={ ip+":8090" } place="/interval/" query="?set=" name="interval"></SetInterval>
+>>>>>>> 5bd09ae3b4743c31a09d8b82403c2028b7b625cf
           </Route>
         </Switch>
       </Router> :

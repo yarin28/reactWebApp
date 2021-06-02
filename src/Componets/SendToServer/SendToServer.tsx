@@ -11,6 +11,7 @@ import {
 } from '@material-ui/core';
 import { useStyles } from './SendToServer.styles';
 import  PopUpMessage from "../PopUpMessage"
+import ip from '../../Ip'
 // Picker
 interface FormItems { slider: number }
 const validate = (values: Partial<FormItems>) => {
@@ -57,7 +58,11 @@ const SendToServer: ComponentType<SendToServerProps> = (props) => {
     const onSubmit = async (values: any) => {
         try {
             console.log(values);
+<<<<<<< HEAD
             const response = await fetch("http://192.168.1.27:8090/" + props.link + props.query + value);
+=======
+            const response = await fetch("http://"+ip+":8090/" + props.link + props.query + value);
+>>>>>>> 5bd09ae3b4743c31a09d8b82403c2028b7b625cf
             const data = await response.json();
             //the server declined the request
             if (response.status ==406){

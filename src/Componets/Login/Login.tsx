@@ -15,8 +15,13 @@ import { Route, useHistory, Switch } from "react-router-dom";
 import Copyright from '../Copyright'
 import { Snackbar } from '@material-ui/core';
 import MuiAlert, { AlertProps } from '@material-ui/lab/Alert';
+<<<<<<< HEAD
 import {useStyles,chickenPhotos} from './Login.styles'
 
+=======
+import { useStyles } from './Login.styles';
+import ip from "../../Ip"
+>>>>>>> 5bd09ae3b4743c31a09d8b82403c2028b7b625cf
 function Alert(props: AlertProps) {
   return <MuiAlert elevation={6} variant="filled" {...props} />;
 }
@@ -51,7 +56,11 @@ const Login: ComponentType<LoginProps> = (props) => {
    */
   const handleSubmit = async (event: any) => {
     try{
+<<<<<<< HEAD
         const url: string = "http://192.168.1.27:8090/login/login/" + "?"
+=======
+        const url: string = "http://"+ip+":8090/login/login/" + "?"
+>>>>>>> 5bd09ae3b4743c31a09d8b82403c2028b7b625cf
       + "username=" + username + "&password=" + password;
     const response = await fetch(url);
     const data = await response.json();

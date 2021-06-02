@@ -11,6 +11,7 @@ import {
 } from '@material-ui/core';
 import { useStyles } from './Motor.styles';
 import PopUpMessage from '../PopUpMessage';
+import ip from "../../Ip"
 // Picker
 interface FormItems { slider: number }
 const validate = (values: Partial<FormItems>) => {
@@ -42,9 +43,17 @@ const Motor: ComponentType<MotorProps> = (props) => {
     const [openServerError, setOpenServerError] = React.useState(false);
     const onSubmit = async (values: any) => {
         try {
+<<<<<<< HEAD
             const response = await fetch("http://192.168.1.27:8090/motor/?steps=" + value);
              // the response was not correct / there was an error inside the server
             if (response.status===406) {
+=======
+            console.log(values);
+            const response = await fetch("http://"+ip+":8090/motor/?steps=" + value);
+            const data = await response.json();
+            console.log(response);
+            if (response.status==406) {
+>>>>>>> 5bd09ae3b4743c31a09d8b82403c2028b7b625cf
                 setButtonColor(Colors.red);
                 setOpenError(true);}
                 // the response was correct and accepted by the server
@@ -61,6 +70,7 @@ const Motor: ComponentType<MotorProps> = (props) => {
             if(e.message==='Timeout'){
             setOpenServerError(true);
             }
+            setOpenServerError(true);
             setButtonColor(Colors.red)
         }
     }
