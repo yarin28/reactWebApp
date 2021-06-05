@@ -1,4 +1,3 @@
-import React, { ComponentType,  useState } from 'react';
 import  { ComponentType,  useRef, useState } from 'react';
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
@@ -99,7 +98,6 @@ const SignUp: ComponentType<SignUpProps> = (props) => {
         }
         else{
         setCantLogIn(true);
-        props.setlogged(true);
         props.setLoged(true);}
 }
 catch (e){

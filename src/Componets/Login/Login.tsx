@@ -15,7 +15,6 @@ import { Route, useHistory, Switch } from "react-router-dom";
 import Copyright from '../Copyright'
 import { Snackbar } from '@material-ui/core';
 import MuiAlert, { AlertProps } from '@material-ui/lab/Alert';
-import {useStyles,chickenPhotos} from './Login.styles'
 import { useStyles } from './Login.styles';
 import ip from "../../Ip"
 function Alert(props: AlertProps) {
