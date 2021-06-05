@@ -84,11 +84,7 @@ const App: ComponentType = () => {
             <DoorPage></DoorPage>
           </Route>
           <Route path="/interval" exact>
-<<<<<<< HEAD
-      <SetInterval ip="192.168.1.27:8090" place="/interval/" query="?set=" name="interval"></SetInterval>
-=======
       <SetInterval ip={ ip+":8090" } place="/interval/" query="?set=" name="interval"></SetInterval>
->>>>>>> 5bd09ae3b4743c31a09d8b82403c2028b7b625cf
           </Route>
         </Switch>
       </Router> :

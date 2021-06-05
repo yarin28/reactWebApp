@@ -43,17 +43,12 @@ const Pump: ComponentType<PumpProps> = (props) => {
     const [openServerError, setOpenServerError] = React.useState(false);
     const onSubmit = async (values: any) => {
         try {
-<<<<<<< HEAD
-            const response = await fetch("http://192.168.1.27:8090/pump/?milliseconds=" + value);
-            //the server denied the request
-            if (response.status===406) {
-=======
             console.log(values);
             const response = await fetch("http://"+ip+":8090/pump/?milliseconds=" + value);
             const data = await response.json();
             console.log(response);
+            //there is an error 
             if (response.status==406) {
->>>>>>> 5bd09ae3b4743c31a09d8b82403c2028b7b625cf
                 setButtonColor(Colors.red);
                 setOpenError(true);}
                 //the server accepted the request

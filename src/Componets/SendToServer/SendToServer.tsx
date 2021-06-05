@@ -57,12 +57,7 @@ const SendToServer: ComponentType<SendToServerProps> = (props) => {
     //on submit of the form
     const onSubmit = async (values: any) => {
         try {
-            console.log(values);
-<<<<<<< HEAD
-            const response = await fetch("http://192.168.1.27:8090/" + props.link + props.query + value);
-=======
             const response = await fetch("http://"+ip+":8090/" + props.link + props.query + value);
->>>>>>> 5bd09ae3b4743c31a09d8b82403c2028b7b625cf
             const data = await response.json();
             //the server declined the request
             if (response.status ==406){
