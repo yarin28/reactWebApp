@@ -28,11 +28,11 @@ import Motor from "./Componets/Motor"
 import About from "./Componets/About"
 import Pump from "./Componets/Pump"
 import VideoStream from "./Componets/VideoStream"
-import ip from "./Ip"
+import { ip,vip } from "./Ip"
 
 const App: ComponentType = () => {
   const classes = useStyles();
-  const [loged,setLoged] = useState(false);
+  const [loged,setLoged] = useState(true);
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline></CssBaseline>
@@ -45,7 +45,7 @@ const App: ComponentType = () => {
            <HomePage />
           </Route>
           <Route path="/live_stream" exact>
-            <VideoStream wsUrl={ "ws://+"+ip+":8000/video_feed" } showFrames></VideoStream>
+            <VideoStream wsUrl={ "ws://+"+vip+":8000/video_feed" } showFrames></VideoStream>
           </Route>
           <Route path="/dash" exact>
             <Dashboard />

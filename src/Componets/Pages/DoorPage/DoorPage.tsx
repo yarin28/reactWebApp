@@ -7,7 +7,7 @@ import { useStyles } from './DoorPage.styles'
 import StatusInfo from "../../StatusInfo";
 import LockIcon from '@material-ui/icons/Lock';
 import LockOpenIcon from '@material-ui/icons/LockOpen';
-import ip from "../../../Ip"
+import { ip } from "../../../Ip"
 const delay = (ms: number) => new Promise(res => setTimeout(res, ms));
 const DoorPage: ComponentType = (props) => {
     const classes = useStyles();

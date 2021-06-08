@@ -11,7 +11,7 @@ import AcUnitIcon from '@material-ui/icons/AcUnit';
 import LockIcon from '@material-ui/icons/Lock';
 import LockOpenIcon from '@material-ui/icons/LockOpen';
 import Door from '../Door'
-import ip from '../../Ip'
+import { ip } from '../../Ip'
 const Dashboard: ComponentType = () => {
     const classes = useStyles()
     const isNight = (n: number | Float32Array) => { return n > 50 };

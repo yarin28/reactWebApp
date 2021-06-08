@@ -14,7 +14,7 @@ import { useHistory } from 'react-router-dom';
 import Copyright from '../Copyright'
 import Snackbar from '@material-ui/core/Snackbar';
 import MuiAlert, { AlertProps } from '@material-ui/lab/Alert';
-import ip from "../../Ip"
+import { ip } from "../../Ip"
 function Alert(props: AlertProps) {
   return <MuiAlert elevation={6} variant="filled" {...props} />;
 }

@@ -11,7 +11,7 @@ import {
 } from '@material-ui/core';
 import { useStyles } from './SendToServer.styles';
 import  PopUpMessage from "../PopUpMessage"
-import ip from '../../Ip'
+import { ip } from '../../Ip'
 // Picker
 interface FormItems { slider: number }
 const validate = (values: Partial<FormItems>) => {
