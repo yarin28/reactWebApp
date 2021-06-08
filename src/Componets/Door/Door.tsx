@@ -17,7 +17,7 @@ interface DoorProps {
 };
 /**
  * 
- * @param props to customize every door.
+ * @param props to customize every door to maj=ke them uniqe.  
  * @returns the door componets allow the user to control the door, open and close it and see the status right now.
  */
 const Door: ComponentType<DoorProps> = (props) => {
