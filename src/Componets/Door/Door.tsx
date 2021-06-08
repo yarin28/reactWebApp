@@ -43,10 +43,12 @@ const Door: ComponentType<DoorProps> = (props) => {
       client.current.onmessage = (message: any) => {
         const dataArray = JSON.parse(message.data);
         try {
+        // the status of the door to be displayed to the server
           if(dataArray.y==1)setChecked(true);
           setChecked(true);
         }
         catch (e) {
+            setDescription("there was an error with the server please try again later")
         }
       };
   }, []);
@@ -84,6 +86,7 @@ const Door: ComponentType<DoorProps> = (props) => {
             setDescription("sent " + boolToTxt + " to the server");
         }
     }
+    // id dont belive that the function has to return enything.
     return checked;
 };
 return (

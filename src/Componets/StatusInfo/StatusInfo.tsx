@@ -1,11 +1,11 @@
 import React, { ComponentType, useEffect, useMemo, useRef, useState } from "react"
 import { w3cwebsocket as WebSocket } from 'websocket'
-import { Theme, createStyles, makeStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
 import Typography from '@material-ui/core/Typography';
 import { useStyles } from "./StatusInfo.styles"
 import { Grid } from "@material-ui/core";
 import { Typewriter } from 'react-typewriting-effect'
+import PopUpMessage from '../PopUpMessage';
 
 
 interface StatusInfoProps {
@@ -30,7 +30,8 @@ const StatusInfo: ComponentType<StatusInfoProps> = (props) => {
   const classes = useStyles();
   const client = useRef<null | WebSocket>(null);
   const [value, setValue] = useState(0.0);
-  const [webSocketError, setWebSocketError] = useState(" ");
+    const [openServerError, setOpenServerError] = React.useState(false);
+  const [webSocketError, setWebSocketError] = useState("the server could not be reached for the "+props.whereToRegister.substr(1)+"server");
 
   const chooseIcon = () => {
     if (props.isGoodCallback(value)) {
@@ -47,7 +48,9 @@ const StatusInfo: ComponentType<StatusInfoProps> = (props) => {
       client.current = new WebSocket(props.ip + props.whereToRegister + "/register");
     }
     catch (e) {
+      //TODO there could be an problam here
       setWebSocketError("couldn`t connect to the server, please retry enother time");
+      setOpenServerError(true);
     }
     // will have to be an prop 
   }, []);
@@ -85,6 +88,7 @@ const StatusInfo: ComponentType<StatusInfoProps> = (props) => {
           </Typography>
         </Grid>
       </Card>
+            <PopUpMessage severity="error" message={webSocketError} open={openServerError} setOpen={setOpenServerError}></PopUpMessage>
     </div>
   );
 }
