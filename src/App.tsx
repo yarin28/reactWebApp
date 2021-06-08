@@ -32,7 +32,7 @@ import ip from "./Ip"
 
 const App: ComponentType = () => {
   const classes = useStyles();
-  const [loged,setLoged] = useState(false);
+  const [loged,setLoged] = useState(true);
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline></CssBaseline>
