@@ -37,7 +37,6 @@ const Motor: ComponentType<MotorProps> = (props) => {
     const classes = useStyles();
     const [value, setValue] = React.useState<number | string | Array<number | string>>(sliderLimit);
     const [buttonColor, setButtonColor] = useState(0)
-
     const [openError, setOpenError] = React.useState(false);
     const [openSuccsess, setOpenSuccsess] = React.useState(false);
     const [openServerError, setOpenServerError] = React.useState(false);

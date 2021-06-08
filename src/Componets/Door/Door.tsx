@@ -1,8 +1,9 @@
-import  { ComponentType, useEffect, useRef, useState } from "react"
+import  React, { ComponentType, useEffect, useRef, useState } from "react"
 import { Grid, Typography } from "@material-ui/core";
 import IconButton from '@material-ui/core/IconButton';
 import MeetingRoomIcon from '@material-ui/icons/MeetingRoom';
 import { useStyles } from "./Door.styles"
+import PopUpMessage from "../PopUpMessage";
 
 /**
  * 
@@ -24,7 +25,9 @@ const Door: ComponentType<DoorProps> = (props) => {
   const client = useRef<null | WebSocket>(null);
     const classes = useStyles();
     const [checked, setChecked] = useState(false);
+    const [errorMessage,setErrorMessage] = useState("the was an errpr")
     const [description, setDescription] = useState("open or close the door");
+    const [openServerError, setOpenServerError] = React.useState(false);
   useEffect(() => {
     try {
       client.current = new WebSocket("ws://"+ props.ip+"/" + props.place + "/register");
@@ -101,6 +104,7 @@ return (
             </Grid>
             <Grid item>Open</Grid>
         </Grid>
+            <PopUpMessage severity="error" message="the server could not be reached" open={openServerError} setOpen={setOpenServerError}></PopUpMessage>
     </div>
 )
 }
