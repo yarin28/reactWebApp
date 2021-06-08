@@ -164,7 +164,7 @@ const SendToServer: ComponentType<SendToServerProps> = (props) => {
             <PopUpMessage severity="success" message="the send was recived by the server" open={openSuccsess}setOpen={setOpenSuccsess}></PopUpMessage>
             <PopUpMessage severity="error" message="there is a problem with arduino, please try again later" open={openError}setOpen={setOpenError}></PopUpMessage>
             <PopUpMessage severity="warning" message="there is no data in the database for this query" open={openThereIsNoDataError}setOpen={setOpenServerError}></PopUpMessage>
-            <PopUpMessage severity="error" message="the server has could not be reached" open={openServerError}setOpen={setOpenServerError}></PopUpMessage>
+            <PopUpMessage severity="error" message="the server could not be reached" open={openServerError}setOpen={setOpenServerError}></PopUpMessage>
         </div>
     );
 }

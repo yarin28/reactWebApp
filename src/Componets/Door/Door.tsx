@@ -1,8 +1,9 @@
-import  { ComponentType, useEffect, useRef, useState } from "react"
+import  React, { ComponentType, useEffect, useRef, useState } from "react"
 import { Grid, Typography } from "@material-ui/core";
 import IconButton from '@material-ui/core/IconButton';
 import MeetingRoomIcon from '@material-ui/icons/MeetingRoom';
 import { useStyles } from "./Door.styles"
+import PopUpMessage from "../PopUpMessage";
 
 /**
  * 
@@ -17,14 +18,16 @@ interface DoorProps {
 };
 /**
  * 
- * @param props to customize every door.
+ * @param props to customize every door to maj=ke them uniqe.  
  * @returns the door componets allow the user to control the door, open and close it and see the status right now.
  */
 const Door: ComponentType<DoorProps> = (props) => {
   const client = useRef<null | WebSocket>(null);
     const classes = useStyles();
     const [checked, setChecked] = useState(false);
+    const [errorMessage,setErrorMessage] = useState("the was an errpr")
     const [description, setDescription] = useState("open or close the door");
+    const [openServerError, setOpenServerError] = React.useState(false);
   useEffect(() => {
     try {
       client.current = new WebSocket("ws://"+ props.ip+"/" + props.place + "/register");
@@ -43,10 +46,12 @@ const Door: ComponentType<DoorProps> = (props) => {
       client.current.onmessage = (message: any) => {
         const dataArray = JSON.parse(message.data);
         try {
+        // the status of the door to be displayed to the server
           if(dataArray.y==1)setChecked(true);
           setChecked(true);
         }
         catch (e) {
+            setDescription("there was an error with the server please try again later")
         }
       };
   }, []);
@@ -84,6 +89,7 @@ const Door: ComponentType<DoorProps> = (props) => {
             setDescription("sent " + boolToTxt + " to the server");
         }
     }
+    // id dont belive that the function has to return enything.
     return checked;
 };
 return (
@@ -98,6 +104,7 @@ return (
             </Grid>
             <Grid item>Open</Grid>
         </Grid>
+            <PopUpMessage severity="error" message="the server could not be reached" open={openServerError} setOpen={setOpenServerError}></PopUpMessage>
     </div>
 )
 }

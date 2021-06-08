@@ -37,7 +37,6 @@ const Motor: ComponentType<MotorProps> = (props) => {
     const classes = useStyles();
     const [value, setValue] = React.useState<number | string | Array<number | string>>(sliderLimit);
     const [buttonColor, setButtonColor] = useState(0)
-
     const [openError, setOpenError] = React.useState(false);
     const [openSuccsess, setOpenSuccsess] = React.useState(false);
     const [openServerError, setOpenServerError] = React.useState(false);
@@ -138,7 +137,7 @@ const Motor: ComponentType<MotorProps> = (props) => {
             {/* those are the messages alerts that the user will be able to get */}
             <PopUpMessage severity="success" message="the send was recived by the server" open={openSuccsess} setOpen={setOpenSuccsess}></PopUpMessage>
             <PopUpMessage severity="error" message="there is a problem with arduino, please try again later" open={openError} setOpen={setOpenError}></PopUpMessage>
-            <PopUpMessage severity="error" message="the server has could not be reached" open={openServerError} setOpen={setOpenServerError}></PopUpMessage>
+            <PopUpMessage severity="error" message="the server could not be reached" open={openServerError} setOpen={setOpenServerError}></PopUpMessage>
         </div>
     );
 }
