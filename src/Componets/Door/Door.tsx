@@ -61,7 +61,7 @@ const Door: ComponentType<DoorProps> = (props) => {
    * the user what is going on with the request
    */
     const handleSubmit = async () => {
-        setChecked(!checked);
+        // setChecked(!checked);
         let boolToTxt: string = "";
         try {
             console.log(checked);
