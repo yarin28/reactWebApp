@@ -20,7 +20,7 @@ import Food from '../../Food.svg'
 import Temp from '../../temp.svg'
 import FlipCameraAndroidIcon from '@material-ui/icons/FlipCameraAndroid';
 import OpacityIcon from '@material-ui/icons/Opacity';
-
+import MeetingRoomIcon from '@material-ui/icons/MeetingRoom';
 /**
  * @brief the nav bar for the web app, with in it is possible to navigate to all
  * the pages in the app.
@@ -148,6 +148,12 @@ const NavBar: ComponentType = () => {
                             <FlipCameraAndroidIcon color="secondary" ></FlipCameraAndroidIcon>
                         </ListItemIcon>
                         <ListItemText primaryTypographyProps={{ color: "secondary" }} primary="Motor" />
+                    </ListItem>
+                    <ListItem button onClick={() => history.push("/door")}>
+                        <ListItemIcon >
+                            <MeetingRoomIcon color="secondary" ></MeetingRoomIcon>
+                        </ListItemIcon>
+                        <ListItemText primaryTypographyProps={{ color: "secondary" }} primary="Door" />
                     </ListItem>
                 </List>
             </Drawer>
