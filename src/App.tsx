@@ -45,7 +45,7 @@ const App: ComponentType = () => {
            <HomePage />
           </Route>
           <Route path="/live_stream" exact>
-            <VideoStream wsUrl={ "ws://+"+vip+":8000/video_feed" } showFrames></VideoStream>
+            <VideoStream wsUrl={ "ws://"+vip+":8000/video_feed" } showFrames></VideoStream>
           </Route>
           <Route path="/dash" exact>
             <Dashboard />

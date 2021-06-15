@@ -83,7 +83,7 @@ const SignUp: ComponentType<SignUpProps> = (props) => {
    * @param event the submit parameters
    */
     const handleSubmit = async (event: any) => {
-        const url: string = "http://"+ip+"/login/sign_up/" + "?"
+        const url: string = "http://"+ip+":8090/login/sign_up/" + "?"
             + "username=" + username + "&password=" + password;
             try{
         const response = await fetch(url, 
@@ -93,8 +93,8 @@ const SignUp: ComponentType<SignUpProps> = (props) => {
         const data = await response.json();
         if(data==true)
         {
-        props.setLoged(true);
-        history.push("/dashboard");
+        // props.setLoged(true);
+        // history.push("/");
         }
         else{
         setCantLogIn(true);
