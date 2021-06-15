@@ -13,7 +13,7 @@ const DoorPage: ComponentType = (props) => {
     const classes = useStyles();
     const isLocked = (n:number) :boolean => {return (n===0);}
     return (
-        <div className={classes.container}>
+        <div className={classes.root}>
             <StatusInfo ip="ws://localhost:8090/" isGoodCallback={isLocked} BadMaterialUiIcon={LockOpenIcon} GoodMaterialUiIcon={LockIcon} whereToRegister="door" description="the status of the door" />
             <Typography variant="h5"> this the door control page, </Typography>
             <Typography variant="h5">in here you can send command to, </Typography>

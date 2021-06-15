@@ -61,7 +61,7 @@ const Door: ComponentType<DoorProps> = (props) => {
    * the user what is going on with the request
    */
     const handleSubmit = async () => {
-        setChecked(!checked);
+        // setChecked(!checked);
         let boolToTxt: string = "";
         try {
             console.log(checked);
@@ -93,7 +93,8 @@ const Door: ComponentType<DoorProps> = (props) => {
     return checked;
 };
 return (
-    <div>
+    // <div className={classes.root}>
+    <div >
         <Typography> {description}</Typography>
         <Grid component="label" container alignItems="center" spacing={1}>
             <Grid item>Close</Grid>
@@ -104,7 +105,7 @@ return (
             </Grid>
             <Grid item>Open</Grid>
         </Grid>
-            <PopUpMessage severity="error" message="the server could not be reached" open={openServerError} setOpen={setOpenServerError}></PopUpMessage>
+            <PopUpMessage severity="error" message={description} open={openServerError} setOpen={setOpenServerError}></PopUpMessage>
     </div>
 )
 }
